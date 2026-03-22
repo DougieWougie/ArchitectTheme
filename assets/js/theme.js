@@ -16,6 +16,9 @@
     // Add loaded class to body when everything is ready
     document.body.classList.add('theme-loaded');
 
+    // Set content offset to match fixed header height
+    initHeaderOffset();
+
     // Initialize smooth scroll for anchor links
     initSmoothScroll();
 
@@ -24,6 +27,23 @@
 
     // Initialize skip link focus fix
     initSkipLinkFocus();
+  }
+
+  /**
+   * Measure fixed header and set --header-height for content offset
+   */
+  function initHeaderOffset() {
+    var header = document.querySelector('.site-header');
+    if (!header) return;
+
+    function update() {
+      document.documentElement.style.setProperty(
+        '--header-height', header.offsetHeight + 'px'
+      );
+    }
+
+    update();
+    window.addEventListener('resize', debounce(update, 150));
   }
 
   /**
