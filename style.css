@@ -1,0 +1,40 @@
+/*
+Theme Name: Baffled Architect
+Theme URI: https://dougiewougie.com
+Author: Dougie Richardson
+Author URI: https://dougiewougie.com
+Description: A modern, clean WordPress theme for technical blogging with dark mode support, JavaScript animations, and smooth scroll features. Optimized for code snippets and mathematical equations.
+Version: 1.1.0
+Requires at least: 5.9
+Tested up to: 6.4
+Requires PHP: 7.4
+License: GNU General Public License v2 or later
+License URI: http://www.gnu.org/licenses/gpl-2.0.html
+Text Domain: baffled-architect
+Tags: blog, technical, dark-mode, responsive, clean, minimal, one-column, two-columns, custom-colors, custom-menu, editor-style, featured-images, threaded-comments, translation-ready
+*/
+
+/*
+ * Additional styles are loaded via wp_enqueue_style in inc/enqueue-scripts.php
+ * This keeps the main stylesheet lightweight and maintainable
+ */
+
+/* Critical base styles to prevent FOUC */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  line-height: 1.6;
+  color: #1a1a1a;
+  background: #ffffff;
+}
