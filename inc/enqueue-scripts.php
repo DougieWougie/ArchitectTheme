@@ -63,6 +63,14 @@ function baffled_architect_enqueue_assets() {
         BAFFLED_ARCHITECT_VERSION
     );
 
+    // Search widget styles
+    wp_enqueue_style(
+        'baffled-architect-search',
+        BAFFLED_ARCHITECT_URI . '/assets/css/search-widget.css',
+        array('baffled-architect-base'),
+        BAFFLED_ARCHITECT_VERSION
+    );
+
     // Main theme JavaScript
     wp_enqueue_script(
         'baffled-architect-main',
@@ -103,6 +111,15 @@ function baffled_architect_enqueue_assets() {
     wp_enqueue_script(
         'baffled-architect-navigation',
         BAFFLED_ARCHITECT_URI . '/assets/js/navigation.js',
+        array(),
+        BAFFLED_ARCHITECT_VERSION,
+        true
+    );
+
+    // Search widget
+    wp_enqueue_script(
+        'baffled-architect-search',
+        BAFFLED_ARCHITECT_URI . '/assets/js/search-widget.js',
         array(),
         BAFFLED_ARCHITECT_VERSION,
         true
