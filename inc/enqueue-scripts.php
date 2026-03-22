@@ -71,6 +71,16 @@ function baffled_architect_enqueue_assets() {
         BAFFLED_ARCHITECT_VERSION
     );
 
+    // 404 page styles
+    if (is_404()) {
+        wp_enqueue_style(
+            'baffled-architect-404',
+            BAFFLED_ARCHITECT_URI . '/assets/css/404.css',
+            array('baffled-architect-base', 'baffled-architect-animations'),
+            BAFFLED_ARCHITECT_VERSION
+        );
+    }
+
     // Main theme JavaScript
     wp_enqueue_script(
         'baffled-architect-main',

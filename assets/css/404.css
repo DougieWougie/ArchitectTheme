@@ -1,0 +1,237 @@
+/**
+ * 404 Page — Glitch Explosion
+ *
+ * @package Baffled_Architect
+ * @since 1.2.0
+ */
+
+/* ========================================================================
+   Layout
+   ======================================================================== */
+
+.error-404 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 60vh;
+  text-align: center;
+  padding: var(--spacing-2xl) var(--spacing-md);
+  overflow: hidden;
+}
+
+/* ========================================================================
+   Glitch Text
+   ======================================================================== */
+
+.glitch-wrapper {
+  position: relative;
+  display: inline-block;
+  margin-bottom: var(--spacing-xl);
+}
+
+.glitch-text {
+  font-family: var(--font-primary);
+  font-size: clamp(4rem, 12vw, 8rem);
+  font-weight: 800;
+  letter-spacing: 0.15em;
+  color: var(--color-accent);
+  position: relative;
+  animation: glitchMain 2.5s ease-out forwards;
+}
+
+.glitch-text::before,
+.glitch-text::after {
+  content: attr(data-text);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.glitch-text::before {
+  color: var(--color-accent-alt);
+  animation: glitchTop 2.5s ease-out forwards;
+}
+
+.glitch-text::after {
+  color: color-mix(in srgb, var(--color-accent) 60%, red);
+  animation: glitchBottom 2.5s ease-out forwards;
+}
+
+/* Scan line overlay */
+.glitch-wrapper::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -10%;
+  width: 120%;
+  height: 100%;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    rgba(0, 0, 0, 0.03) 2px,
+    rgba(0, 0, 0, 0.03) 4px
+  );
+  pointer-events: none;
+  opacity: 0;
+  animation: scanLinesIn 2.5s ease-out forwards;
+}
+
+/* ========================================================================
+   Glitch Keyframes
+   ======================================================================== */
+
+@keyframes glitchMain {
+  0% { opacity: 0; transform: scale(1.1); }
+  5% { opacity: 1; }
+  10% { transform: scale(1) skewX(-2deg); }
+  12% { transform: scale(1) skewX(3deg); }
+  14% { transform: scale(1) skewX(-1deg); }
+  20% { transform: scale(1) skewX(2deg); }
+  22% { transform: scale(1) skewX(0deg); }
+  30% { transform: skewX(-1.5deg); }
+  32% { transform: skewX(1deg); }
+  34% { transform: skewX(0deg); }
+  50% { transform: skewX(0.5deg); }
+  52% { transform: skewX(0deg); }
+  70% { transform: skewX(-0.3deg); }
+  72% { transform: skewX(0deg); }
+  100% { transform: skewX(0deg); opacity: 1; }
+}
+
+@keyframes glitchTop {
+  0% { clip-path: polygon(0 0, 100% 0, 100% 45%, 0 45%); transform: translate(-8px, -3px); opacity: 0.8; }
+  5% { opacity: 0.8; }
+  10% { clip-path: polygon(0 15%, 100% 15%, 100% 55%, 0 55%); transform: translate(6px, -2px); }
+  15% { clip-path: polygon(0 0, 100% 0, 100% 40%, 0 40%); transform: translate(-4px, 2px); }
+  20% { clip-path: polygon(0 20%, 100% 20%, 100% 50%, 0 50%); transform: translate(5px, -1px); }
+  25% { clip-path: polygon(0 5%, 100% 5%, 100% 35%, 0 35%); transform: translate(-3px, 1px); }
+  30% { transform: translate(3px, -1px); opacity: 0.6; }
+  40% { transform: translate(-2px, 0); opacity: 0.4; }
+  50% { transform: translate(1px, 0); opacity: 0.3; }
+  60% { transform: translate(-1px, 0); opacity: 0.2; }
+  80% { transform: translate(0, 0); opacity: 0.1; }
+  100% { transform: translate(0, 0); opacity: 0; clip-path: polygon(0 0, 100% 0, 100% 45%, 0 45%); }
+}
+
+@keyframes glitchBottom {
+  0% { clip-path: polygon(0 55%, 100% 55%, 100% 100%, 0 100%); transform: translate(6px, 3px); opacity: 0.7; }
+  5% { opacity: 0.7; }
+  10% { clip-path: polygon(0 60%, 100% 60%, 100% 90%, 0 90%); transform: translate(-5px, 2px); }
+  15% { clip-path: polygon(0 50%, 100% 50%, 100% 100%, 0 100%); transform: translate(4px, -2px); }
+  20% { clip-path: polygon(0 65%, 100% 65%, 100% 85%, 0 85%); transform: translate(-3px, 1px); }
+  25% { clip-path: polygon(0 55%, 100% 55%, 100% 95%, 0 95%); transform: translate(2px, -1px); }
+  30% { transform: translate(-2px, 1px); opacity: 0.5; }
+  40% { transform: translate(1px, 0); opacity: 0.3; }
+  50% { transform: translate(-1px, 0); opacity: 0.2; }
+  60% { transform: translate(1px, 0); opacity: 0.15; }
+  80% { transform: translate(0, 0); opacity: 0.05; }
+  100% { transform: translate(0, 0); opacity: 0; clip-path: polygon(0 55%, 100% 55%, 100% 100%, 0 100%); }
+}
+
+@keyframes scanLinesIn {
+  0%, 5% { opacity: 0; }
+  10% { opacity: 0.8; }
+  30% { opacity: 0.5; }
+  60% { opacity: 0.2; }
+  100% { opacity: 0; }
+}
+
+/* ========================================================================
+   Subtitle & Button — Fade in after glitch
+   ======================================================================== */
+
+.error-404-message {
+  font-size: var(--font-size-lg);
+  color: var(--color-secondary);
+  margin-bottom: var(--spacing-xl);
+  opacity: 0;
+  animation: fadeInUp 0.6s ease-out 2s forwards;
+}
+
+.error-404-home {
+  display: inline-block;
+  padding: var(--spacing-sm) var(--spacing-xl);
+  background: var(--color-accent);
+  color: white;
+  text-decoration: none;
+  border-radius: var(--radius-md);
+  font-weight: 600;
+  font-size: var(--font-size-base);
+  opacity: 0;
+  animation: fadeInUp 0.6s ease-out 2.3s forwards;
+  transition: background-color var(--hover-transition), transform var(--hover-transition);
+}
+
+.error-404-home:hover {
+  background: var(--color-link-hover);
+  transform: translateY(-2px);
+  color: white;
+}
+
+/* ========================================================================
+   Ambient glitch flicker (subtle, after initial animation)
+   ======================================================================== */
+
+.glitch-text.settled {
+  animation: glitchIdle 8s ease-in-out infinite 3s;
+}
+
+.glitch-text.settled::before {
+  animation: glitchIdleTop 8s ease-in-out infinite 3s;
+}
+
+.glitch-text.settled::after {
+  animation: glitchIdleBottom 8s ease-in-out infinite 3s;
+}
+
+@keyframes glitchIdle {
+  0%, 92%, 100% { transform: skewX(0deg); }
+  93% { transform: skewX(-0.5deg); }
+  94% { transform: skewX(0.8deg); }
+  95% { transform: skewX(-0.3deg); }
+  96% { transform: skewX(0deg); }
+}
+
+@keyframes glitchIdleTop {
+  0%, 92%, 100% { opacity: 0; transform: translate(0, 0); }
+  93% { opacity: 0.3; transform: translate(-2px, -1px); clip-path: polygon(0 20%, 100% 20%, 100% 40%, 0 40%); }
+  95% { opacity: 0.2; transform: translate(1px, 0); }
+  96% { opacity: 0; transform: translate(0, 0); }
+}
+
+@keyframes glitchIdleBottom {
+  0%, 92%, 100% { opacity: 0; transform: translate(0, 0); }
+  93% { opacity: 0.25; transform: translate(2px, 1px); clip-path: polygon(0 60%, 100% 60%, 100% 80%, 0 80%); }
+  95% { opacity: 0.15; transform: translate(-1px, 0); }
+  96% { opacity: 0; transform: translate(0, 0); }
+}
+
+/* ========================================================================
+   Reduced Motion
+   ======================================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+  .glitch-text,
+  .glitch-text::before,
+  .glitch-text::after,
+  .glitch-wrapper::after,
+  .error-404-message,
+  .error-404-home,
+  .glitch-text.settled,
+  .glitch-text.settled::before,
+  .glitch-text.settled::after {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+
+  .glitch-text::before,
+  .glitch-text::after {
+    display: none;
+  }
+}

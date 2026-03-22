@@ -24,3 +24,6 @@ Thumbs.db
 
 # Compiled CSS/JS (if using a build tool)
 *.map
+
+# Superpowers brainstorming
+.superpowers/
