@@ -86,6 +86,11 @@ body {
   transition: background-color var(--theme-transition), color var(--theme-transition);
 }
 
+img {
+  max-width: 100%;
+  height: auto;
+}
+
 /* Container */
 .site {
   display: flex;
@@ -358,6 +363,7 @@ em, i {
 
 .site-main {
   flex: 1;
+  min-width: 0;
 }
 
 /* Page Header */
@@ -412,6 +418,23 @@ em, i {
 
 .entry-content {
   margin-bottom: var(--spacing-lg);
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+}
+
+.entry-content img,
+.entry-content video,
+.entry-content iframe,
+.entry-content embed,
+.entry-content object {
+  max-width: 100%;
+  height: auto;
+}
+
+.entry-content table {
+  max-width: 100%;
+  overflow-x: auto;
+  display: block;
 }
 
 .entry-footer {
