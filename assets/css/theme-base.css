@@ -474,6 +474,7 @@ a.post-thumbnail:hover img {
 .widget-area {
   display: grid;
   gap: var(--spacing-xl);
+  align-self: start;
 }
 
 .widget {
