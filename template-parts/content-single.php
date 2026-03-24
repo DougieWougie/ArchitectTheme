@@ -14,7 +14,7 @@
         </div>
     </header>
 
-    <div class="entry-content animate-on-scroll animate-fade-in">
+    <div class="entry-content">
         <?php
         the_content(
             sprintf(
