@@ -9,20 +9,20 @@
 (function() {
   'use strict';
 
-  var STORAGE_KEY = 'cookie-consent';
-  var TIMESTAMP_KEY = 'cookie-consent-timestamp';
-  var EXPIRY_DAYS = 365;
+  const STORAGE_KEY = 'cookie-consent';
+  const TIMESTAMP_KEY = 'cookie-consent-timestamp';
+  const EXPIRY_DAYS = 365;
 
   /**
    * Check if consent has expired
    */
   function isConsentExpired() {
-    var timestamp = localStorage.getItem(TIMESTAMP_KEY);
+    const timestamp = localStorage.getItem(TIMESTAMP_KEY);
     if (!timestamp) return true;
 
-    var consentDate = new Date(parseInt(timestamp, 10));
-    var now = new Date();
-    var diffDays = (now - consentDate) / (1000 * 60 * 60 * 24);
+    const consentDate = new Date(parseInt(timestamp, 10));
+    const now = new Date();
+    const diffDays = (now - consentDate) / (1000 * 60 * 60 * 24);
 
     return diffDays > EXPIRY_DAYS;
   }
@@ -42,7 +42,10 @@
     banner.classList.remove('visible');
     banner.classList.add('hiding');
 
+    const fallback = setTimeout(() => banner.remove(), 500);
+
     banner.addEventListener('transitionend', function() {
+      clearTimeout(fallback);
       banner.remove();
     }, { once: true });
   }
@@ -51,19 +54,19 @@
    * Initialize the cookie banner
    */
   function init() {
-    var consent = localStorage.getItem(STORAGE_KEY);
+    const consent = localStorage.getItem(STORAGE_KEY);
 
     if (consent && !isConsentExpired()) {
       return;
     }
 
-    var banner = document.getElementById('cookie-banner');
+    const banner = document.getElementById('cookie-banner');
     if (!banner) return;
 
-    var acceptBtn = document.getElementById('cookie-accept');
-    var declineBtn = document.getElementById('cookie-decline');
+    const acceptBtn = document.getElementById('cookie-accept');
+    const declineBtn = document.getElementById('cookie-decline');
 
-    // Show banner with slight delay for slide-up animation
+    // Show banner on next frame to allow CSS transition
     requestAnimationFrame(function() {
       banner.classList.add('visible');
     });
