@@ -66,10 +66,10 @@
             <?php esc_html_e('This site uses essential cookies to ensure it functions properly. No tracking or advertising cookies are used.', 'baffled-architect'); ?>
         </p>
         <div class="cookie-banner-buttons">
-            <button id="cookie-accept" class="cookie-banner-btn cookie-banner-btn-accept">
+            <button id="cookie-accept" type="button" class="cookie-banner-btn cookie-banner-btn-accept">
                 <?php esc_html_e('Accept', 'baffled-architect'); ?>
             </button>
-            <button id="cookie-decline" class="cookie-banner-btn cookie-banner-btn-decline">
+            <button id="cookie-decline" type="button" class="cookie-banner-btn cookie-banner-btn-decline">
                 <?php esc_html_e('Decline', 'baffled-architect'); ?>
             </button>
         </div>
