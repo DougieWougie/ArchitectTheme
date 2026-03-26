@@ -60,6 +60,22 @@
     </footer>
 </div>
 
+<div id="cookie-banner" class="cookie-banner" role="dialog" aria-label="<?php esc_attr_e('Cookie consent', 'baffled-architect'); ?>">
+    <div class="cookie-banner-content">
+        <p class="cookie-banner-text">
+            <?php esc_html_e('This site uses essential cookies to ensure it functions properly. No tracking or advertising cookies are used.', 'baffled-architect'); ?>
+        </p>
+        <div class="cookie-banner-buttons">
+            <button id="cookie-accept" class="cookie-banner-btn cookie-banner-btn-accept">
+                <?php esc_html_e('Accept', 'baffled-architect'); ?>
+            </button>
+            <button id="cookie-decline" class="cookie-banner-btn cookie-banner-btn-decline">
+                <?php esc_html_e('Decline', 'baffled-architect'); ?>
+            </button>
+        </div>
+    </div>
+</div>
+
 <button id="scroll-to-top" class="scroll-to-top" aria-label="Scroll to top">
     <svg class="scroll-to-top-icon" width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
         <path fill="currentColor" d="M4,21 L4,9 L12,3 L20,9 L20,21 L14,21 L14,14 L10,14 L10,21 Z"/>
