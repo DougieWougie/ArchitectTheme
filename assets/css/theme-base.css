@@ -598,7 +598,10 @@ pre[class*="language-"] {
   padding: var(--spacing-lg);
 }
 
-code[class*="language-"] {
+pre code[class*="language-"] {
+  background: none;
+  color: var(--color-primary);
+  padding: 0;
   font-family: var(--font-code);
   font-size: var(--font-size-sm);
 }
