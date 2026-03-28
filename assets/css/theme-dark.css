@@ -117,6 +117,18 @@
   color: var(--color-accent);
 }
 
+/* Prism toolbar in dark mode (copy button etc.) */
+[data-theme="dark"] div.code-toolbar > .toolbar {
+  opacity: 0.8;
+}
+
+[data-theme="dark"] div.code-toolbar > .toolbar > .toolbar-item > button,
+[data-theme="dark"] div.code-toolbar > .toolbar > .toolbar-item > a,
+[data-theme="dark"] div.code-toolbar > .toolbar > .toolbar-item > span {
+  background: var(--color-border);
+  color: var(--color-secondary);
+}
+
 /* ========================================================================
    Image Adjustments for Dark Mode
    ======================================================================== */
