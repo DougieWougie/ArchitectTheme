@@ -43,7 +43,7 @@ function baffled_architect_enqueue_assets() {
     wp_enqueue_style(
         'baffled-architect-dark',
         BAFFLED_ARCHITECT_URI . '/assets/css/theme-dark.css',
-        array('baffled-architect-base'),
+        array('baffled-architect-base', 'prism-theme'),
         BAFFLED_ARCHITECT_VERSION
     );
 
@@ -83,7 +83,7 @@ function baffled_architect_enqueue_assets() {
     wp_enqueue_style(
         'prism-theme',
         'https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css',
-        array(),
+        array('baffled-architect-base'),
         '1.29.0'
     );
 
@@ -221,6 +221,12 @@ function baffled_architect_resource_hints($urls, $relation_type) {
         );
         $urls[] = array(
             'href' => 'https://fonts.gstatic.com',
+            'crossorigin',
+        );
+    }
+    if (wp_style_is('prism-theme', 'queue') && 'preconnect' === $relation_type) {
+        $urls[] = array(
+            'href' => 'https://cdnjs.cloudflare.com',
             'crossorigin',
         );
     }

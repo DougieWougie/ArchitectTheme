@@ -83,6 +83,9 @@
           const newTheme = e.matches ? 'dark' : 'light';
           document.documentElement.setAttribute('data-theme', newTheme);
           updateToggleButton(newTheme);
+          document.dispatchEvent(new CustomEvent('themeChanged', {
+            detail: { theme: newTheme }
+          }));
         }
       });
     }
