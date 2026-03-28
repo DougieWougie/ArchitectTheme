@@ -178,6 +178,15 @@ function baffled_architect_enqueue_assets() {
         true
     );
 
+    // Prism theme sync - re-highlights on dark/light toggle
+    wp_enqueue_script(
+        'baffled-architect-prism-sync',
+        BAFFLED_ARCHITECT_URI . '/assets/js/prism-theme-sync.js',
+        array('prism-core', 'baffled-architect-dark-mode'),
+        BAFFLED_ARCHITECT_VERSION,
+        true
+    );
+
     // Comments reply script
     if (is_singular() && comments_open() && get_option('thread_comments')) {
         wp_enqueue_script('comment-reply');
