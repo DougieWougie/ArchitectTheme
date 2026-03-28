@@ -79,6 +79,14 @@ function baffled_architect_enqueue_assets() {
         BAFFLED_ARCHITECT_VERSION
     );
 
+    // Prism.js syntax highlighting - light theme
+    wp_enqueue_style(
+        'prism-theme',
+        'https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css',
+        array(),
+        '1.29.0'
+    );
+
     // 404 page styles
     if (is_404()) {
         wp_enqueue_style(
@@ -149,6 +157,24 @@ function baffled_architect_enqueue_assets() {
         BAFFLED_ARCHITECT_URI . '/assets/js/cookie-banner.js',
         array(),
         BAFFLED_ARCHITECT_VERSION,
+        true
+    );
+
+    // Prism.js core
+    wp_enqueue_script(
+        'prism-core',
+        'https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js',
+        array(),
+        '1.29.0',
+        true
+    );
+
+    // Prism.js Autoloader plugin - lazy-loads language grammars
+    wp_enqueue_script(
+        'prism-autoloader',
+        'https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/autoloader/prism-autoloader.min.js',
+        array('prism-core'),
+        '1.29.0',
         true
     );
 
