@@ -12,7 +12,7 @@ if (!defined('ABSPATH')) {
 }
 
 // Define theme constants
-define('BAFFLED_ARCHITECT_VERSION', '1.7.1');
+define('BAFFLED_ARCHITECT_VERSION', '1.7.2');
 define('BAFFLED_ARCHITECT_DIR', get_template_directory());
 define('BAFFLED_ARCHITECT_URI', get_template_directory_uri());
 

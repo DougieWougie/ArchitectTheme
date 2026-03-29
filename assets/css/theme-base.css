@@ -231,8 +231,8 @@ em, i {
 
 /* Profile picture styling */
 .profile-picture {
-  width: 200px;
-  height: 200px;
+  width: 125px;
+  height: 125px;
   border-radius: 50%;
   border: 3px solid var(--color-border);
   transition: transform 0.6s ease;
