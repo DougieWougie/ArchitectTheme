@@ -627,6 +627,37 @@ pre code[class*="language-"] {
   border-radius: var(--radius-sm);
 }
 
+/* Prism toolbar (copy button) */
+div.code-toolbar > .toolbar {
+  top: var(--spacing-sm);
+  right: var(--spacing-sm);
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+div.code-toolbar:hover > .toolbar,
+div.code-toolbar:focus-within > .toolbar {
+  opacity: 1;
+}
+
+div.code-toolbar > .toolbar > .toolbar-item > button,
+div.code-toolbar > .toolbar > .toolbar-item > a,
+div.code-toolbar > .toolbar > .toolbar-item > span {
+  background: var(--color-border);
+  color: var(--color-secondary);
+  font-size: var(--font-size-xs);
+  padding: 0.25em 0.5em;
+  border-radius: var(--radius-sm);
+  box-shadow: none;
+  cursor: pointer;
+}
+
+div.code-toolbar > .toolbar > .toolbar-item > button:hover,
+div.code-toolbar > .toolbar > .toolbar-item > a:hover {
+  background: var(--color-accent);
+  color: var(--color-background);
+}
+
 /* ========================================================================
    Forms
    ======================================================================== */

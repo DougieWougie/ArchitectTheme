@@ -178,6 +178,31 @@ function baffled_architect_enqueue_assets() {
         true
     );
 
+    // Prism.js Toolbar plugin (required by Copy to Clipboard)
+    wp_enqueue_style(
+        'prism-toolbar',
+        'https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/toolbar/prism-toolbar.min.css',
+        array('prism-theme'),
+        '1.29.0'
+    );
+
+    wp_enqueue_script(
+        'prism-toolbar',
+        'https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/toolbar/prism-toolbar.min.js',
+        array('prism-core'),
+        '1.29.0',
+        true
+    );
+
+    // Prism.js Copy to Clipboard plugin
+    wp_enqueue_script(
+        'prism-copy-to-clipboard',
+        'https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/copy-to-clipboard/prism-copy-to-clipboard.min.js',
+        array('prism-toolbar'),
+        '1.29.0',
+        true
+    );
+
     // Prism theme sync - re-highlights on dark/light toggle
     wp_enqueue_script(
         'baffled-architect-prism-sync',
