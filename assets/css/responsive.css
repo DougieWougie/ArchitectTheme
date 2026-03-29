@@ -278,7 +278,7 @@
   }
 
   /* Comments - Reduce spacing */
-  .comment {
+  .comment-list > .comment {
     padding: var(--spacing-md);
   }
 }
