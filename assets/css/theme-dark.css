@@ -46,8 +46,10 @@
   border-color: var(--color-border);
 }
 
-[data-theme="dark"] code[class*="language-"] {
+[data-theme="dark"] code[class*="language-"],
+[data-theme="dark"] pre[class*="language-"] code {
   color: #e2e8f0;
+  text-shadow: none;
 }
 
 /* Prism token colors for dark mode */

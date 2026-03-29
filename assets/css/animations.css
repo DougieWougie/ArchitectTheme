@@ -197,7 +197,7 @@ body {
    Button Animations
    ======================================================================== */
 
-button,
+button:not(.scroll-to-top):not(.menu-toggle):not(.theme-toggle),
 input[type="submit"],
 input[type="button"],
 a.button,
@@ -207,7 +207,7 @@ a.button,
   transition: all var(--hover-transition);
 }
 
-button::before,
+button:not(.scroll-to-top):not(.menu-toggle):not(.theme-toggle)::before,
 input[type="submit"]::before,
 input[type="button"]::before,
 a.button::before,
@@ -224,7 +224,7 @@ a.button::before,
   transition: width 0.4s, height 0.4s;
 }
 
-button:hover::before,
+button:not(.scroll-to-top):not(.menu-toggle):not(.theme-toggle):hover::before,
 input[type="submit"]:hover::before,
 input[type="button"]:hover::before,
 a.button:hover::before,
