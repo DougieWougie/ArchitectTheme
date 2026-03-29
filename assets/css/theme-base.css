@@ -204,6 +204,14 @@ em, i {
   padding-top: var(--header-height, 5rem);
 }
 
+.single .site-header {
+  position: static;
+}
+
+.single .site-content {
+  padding-top: 0;
+}
+
 .header-container {
   max-width: var(--container-max-width);
   margin: 0 auto;
