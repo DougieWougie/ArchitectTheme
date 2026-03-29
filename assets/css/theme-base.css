@@ -127,6 +127,7 @@ img {
    ======================================================================== */
 
 h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-accent);
   font-weight: 600;
   line-height: 1.2;
   margin-top: var(--spacing-2xl);
