@@ -132,6 +132,19 @@
 }
 
 /* ========================================================================
+   Block Library - Table Stripes in Dark Mode
+   ======================================================================== */
+
+/* WP core sets an #f0f0f0 stripe that is unreadable against light text */
+[data-theme="dark"] .wp-block-table.is-style-stripes tbody tr:nth-child(odd) {
+  background-color: var(--color-surface);
+}
+
+[data-theme="dark"] .wp-block-table.is-style-stripes {
+  border-bottom-color: var(--color-border);
+}
+
+/* ========================================================================
    Image Adjustments for Dark Mode
    ======================================================================== */
 

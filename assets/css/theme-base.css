@@ -195,8 +195,13 @@ em, i {
 }
 
 @media screen and (max-width: 782px) {
-  .admin-bar {
-    --wp-admin-bar-height: 46px;
+  /*
+   * On screens <=782px WordPress's #wpadminbar is position: absolute (not fixed),
+   * so it scrolls away with the page. Pin the fixed header to the top so it
+   * doesn't leave a gap once the admin bar has scrolled off.
+   */
+  .admin-bar .site-header {
+    top: 0;
   }
 }
 

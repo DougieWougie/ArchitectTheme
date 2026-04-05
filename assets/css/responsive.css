@@ -260,6 +260,21 @@
     right: 20px;
     width: 44px;
     height: 44px;
+    /*
+     * On mobile the cookie banner stacks vertically and covers the bottom
+     * ~160px of the viewport, hiding this button behind it. Raise the button
+     * above the banner's z-index (--z-modal: 1000).
+     */
+    z-index: calc(var(--z-modal) + 1);
+  }
+
+  /*
+   * When the cookie banner is visible, shift the scroll-to-top button above it
+   * so the two don't visually collide. The banner precedes #scroll-to-top in
+   * the DOM, so a subsequent-sibling selector works.
+   */
+  .cookie-banner.visible ~ .scroll-to-top {
+    bottom: 180px;
   }
 
   .scroll-to-top-icon {
