@@ -12,7 +12,7 @@
   const SCROLL_THRESHOLD = 300; // Show button after scrolling 300px
 
   let scrollButton = null;
-  let isScrolling = false;
+  let rafId = null;
 
   /**
    * Initialize button
@@ -32,13 +32,18 @@
   }
 
   /**
-   * Handle scroll events with requestAnimationFrame for performance
+   * Handle scroll events with requestAnimationFrame for performance.
+   * Cancels any pending frame before scheduling a new one so the callback
+   * always reads the most recent scroll position — prevents the brief
+   * show/hide flicker caused by dropped events during mobile momentum scrolling.
    */
   function handleScroll() {
-    if (isScrolling) return;
+    if (rafId !== null) {
+      cancelAnimationFrame(rafId);
+    }
 
-    isScrolling = true;
-    requestAnimationFrame(() => {
+    rafId = requestAnimationFrame(() => {
+      rafId = null;
       const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
 
       if (scrollTop > SCROLL_THRESHOLD) {
@@ -46,8 +51,6 @@
       } else {
         scrollButton.classList.remove('visible');
       }
-
-      isScrolling = false;
     });
   }
 

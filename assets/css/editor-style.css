@@ -68,9 +68,9 @@
   color: var(--color-primary);
 }
 
-.editor-styles-wrapper h1 { font-size: 1.953rem;  }
-.editor-styles-wrapper h2 { font-size: 1.5625rem; }
-.editor-styles-wrapper h3 { font-size: 1.25rem;   }
+.editor-styles-wrapper h1 { font-size: 1.5625rem; }
+.editor-styles-wrapper h2 { font-size: 1.25rem;   }
+.editor-styles-wrapper h3 { font-size: 1.0625rem; }
 .editor-styles-wrapper h4 { font-size: 1rem;      }
 .editor-styles-wrapper h5 { font-size: 0.875rem;  }
 .editor-styles-wrapper h6 { font-size: 0.875rem;  }
