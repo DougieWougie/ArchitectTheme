@@ -79,6 +79,14 @@ function baffled_architect_enqueue_assets() {
         BAFFLED_ARCHITECT_VERSION
     );
 
+    // Gutenberg block styles
+    wp_enqueue_style(
+        'baffled-architect-blocks',
+        BAFFLED_ARCHITECT_URI . '/assets/css/blocks.css',
+        array('baffled-architect-base'),
+        BAFFLED_ARCHITECT_VERSION
+    );
+
     // Prism.js syntax highlighting - light theme
     wp_enqueue_style(
         'prism-theme',

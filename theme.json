@@ -1,0 +1,77 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/theme.json",
+  "version": 2,
+  "settings": {
+    "appearanceTools": true,
+    "color": {
+      "defaultPalette": false,
+      "defaultGradients": false,
+      "customGradient": false,
+      "palette": [
+        { "color": "#1a1a1a", "name": "Primary",     "slug": "primary"     },
+        { "color": "#ffffff", "name": "Background",  "slug": "background"  },
+        { "color": "#f9fafb", "name": "Surface",     "slug": "surface"     },
+        { "color": "#666666", "name": "Secondary",   "slug": "secondary"   },
+        { "color": "#e5e7eb", "name": "Border",      "slug": "border"      },
+        { "color": "#8b5cf6", "name": "Accent",      "slug": "accent"      },
+        { "color": "#7c3aed", "name": "Accent Dark", "slug": "accent-dark" },
+        { "color": "#06b6d4", "name": "Accent Alt",  "slug": "accent-alt"  }
+      ]
+    },
+    "typography": {
+      "customFontSize": true,
+      "lineHeight": true,
+      "fontFamilies": [
+        {
+          "fontFamily": "'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif",
+          "name": "Poppins (Body)",
+          "slug": "primary"
+        },
+        {
+          "fontFamily": "'Special Elite', 'Courier New', monospace",
+          "name": "Special Elite (Headings)",
+          "slug": "accent"
+        },
+        {
+          "fontFamily": "'Fira Code', 'Consolas', 'Monaco', 'Courier New', monospace",
+          "name": "Fira Code (Code)",
+          "slug": "code"
+        }
+      ],
+      "fontSizes": [
+        { "name": "Extra Small", "size": "0.8125rem", "slug": "xs"   },
+        { "name": "Small",       "size": "0.875rem",  "slug": "sm"   },
+        { "name": "Base",        "size": "1rem",      "slug": "base" },
+        { "name": "Large",       "size": "1.25rem",   "slug": "lg"   },
+        { "name": "Extra Large", "size": "1.5625rem", "slug": "xl"   },
+        { "name": "2X Large",    "size": "1.953rem",  "slug": "2xl"  },
+        { "name": "3X Large",    "size": "2.441rem",  "slug": "3xl"  },
+        { "name": "4X Large",    "size": "3.052rem",  "slug": "4xl"  }
+      ]
+    },
+    "spacing": {
+      "padding": true,
+      "margin": true,
+      "blockGap": true,
+      "spacingSizes": [
+        { "name": "Extra Small", "size": "0.25rem", "slug": "xs"  },
+        { "name": "Small",       "size": "0.5rem",  "slug": "sm"  },
+        { "name": "Medium",      "size": "1rem",    "slug": "md"  },
+        { "name": "Large",       "size": "1.5rem",  "slug": "lg"  },
+        { "name": "Extra Large", "size": "2rem",    "slug": "xl"  },
+        { "name": "2X Large",    "size": "3rem",    "slug": "2xl" },
+        { "name": "3X Large",    "size": "4rem",    "slug": "3xl" }
+      ]
+    },
+    "layout": {
+      "contentSize": "900px",
+      "wideSize": "1200px"
+    },
+    "border": {
+      "color": true,
+      "radius": true,
+      "style": true,
+      "width": true
+    }
+  }
+}

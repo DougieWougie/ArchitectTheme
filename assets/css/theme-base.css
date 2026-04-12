@@ -697,8 +697,7 @@ select:focus {
 
 button,
 input[type="submit"],
-input[type="button"],
-.wp-block-button__link {
+input[type="button"] {
   padding: var(--spacing-sm) var(--spacing-lg);
   background: var(--color-accent);
   color: white;
@@ -953,6 +952,12 @@ input[type="button"]:hover {
   display: block;
   margin-left: auto;
   margin-right: auto;
+}
+
+/* Wide/full alignment handled in blocks.css; these ensure the
+   .entry-content overflow is visible so wide blocks can escape. */
+.entry-content {
+  overflow: visible;
 }
 
 .clear::after {
