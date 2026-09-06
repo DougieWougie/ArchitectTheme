@@ -4,7 +4,7 @@ Contributors: Dougie Richardson
 Requires at least: 5.9
 Tested up to: 6.4
 Requires PHP: 7.4
-Version: 1.0.2
+Version: 2.1.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 Tags: blog, technical, dark-mode, responsive, clean, minimal, one-column, two-columns, custom-colors, custom-menu, editor-style, featured-images, threaded-comments, translation-ready
@@ -132,6 +132,57 @@ The theme follows WCAG 2.1 Level AA guidelines:
 
 == Changelog ==
 
+= 2.1.0 =
+* Added the Prism.js Line Numbers plugin - add the `line-numbers` class to a code block to number its lines
+
+= 2.0.2 =
+* Reduced heading sizes on the front end and in the block editor
+* Fixed the scroll-to-top button flickering during momentum scrolling on mobile
+* Styled tag cloud links with the accent font
+* Updated the theme screenshot
+
+= 2.0.0 =
+* Added full block editor (Gutenberg) support via theme.json
+* Added block library styles for core blocks
+* Added editor styles so the editor matches the front end
+
+= 1.7.3 =
+* Fixed striped table styling
+* Reduced heading font sizes
+
+= 1.7.2 =
+* Reduced header height
+
+= 1.7.1 =
+* Fixed the mobile home button being hidden
+
+= 1.7.0 =
+* Added a copy-to-clipboard button on code blocks via the Prism Toolbar plugin
+* Changed heading sizes
+
+= 1.5.0 =
+* Updated the heading font family
+* Removed the fixed header on single posts
+* Added list styling
+* Fixed comment padding and a CSS specificity conflict with Prism
+
+= 1.4.0 =
+* Added a GDPR cookie banner with reduced-motion support
+* Added Prism.js syntax highlighting, loaded from CDN with the Autoloader plugin
+* Code blocks now re-highlight when the dark/light mode is toggled
+* Fixed sidebar widgets stretching to full height
+
+= 1.3.2 =
+* Fixed large posts not loading
+
+= 1.3.1 =
+* Added a custom 404 page
+* Fixed the header
+* Fixed the flexible layout
+
+= 1.2.0 =
+* Added search
+
 = 1.0.0 =
 * Initial release
 * Dark mode toggle with localStorage persistence
@@ -145,8 +196,12 @@ The theme follows WCAG 2.1 Level AA guidelines:
 
 == Upgrade Notice ==
 
+= 2.1.0 =
+Adds optional line numbering for code blocks
+
 = 1.0.1 =
 Initial release of Baffled Architect theme
+
 = 1.0.2 =
 Fixed floating action button bug
 

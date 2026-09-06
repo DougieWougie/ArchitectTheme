@@ -43,7 +43,7 @@ function baffled_architect_enqueue_assets() {
     wp_enqueue_style(
         'baffled-architect-dark',
         BAFFLED_ARCHITECT_URI . '/assets/css/theme-dark.css',
-        array('baffled-architect-base', 'prism-theme'),
+        array('baffled-architect-base', 'prism-theme', 'prism-line-numbers'),
         BAFFLED_ARCHITECT_VERSION
     );
 
@@ -197,6 +197,22 @@ function baffled_architect_enqueue_assets() {
     wp_enqueue_script(
         'prism-toolbar',
         'https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/toolbar/prism-toolbar.min.js',
+        array('prism-core'),
+        '1.29.0',
+        true
+    );
+
+    // Prism.js Line Numbers plugin - add the `line-numbers` class to a code block
+    wp_enqueue_style(
+        'prism-line-numbers',
+        'https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.css',
+        array('prism-theme'),
+        '1.29.0'
+    );
+
+    wp_enqueue_script(
+        'prism-line-numbers',
+        'https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.js',
         array('prism-core'),
         '1.29.0',
         true
