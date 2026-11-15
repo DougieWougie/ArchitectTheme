@@ -174,7 +174,6 @@ body {
   line-height: 1.6;
   color: var(--color-primary);
   background: var(--color-background);
-  transition: background-color var(--theme-transition), color var(--theme-transition);
 }
 
 img {
@@ -224,7 +223,6 @@ h1, h2, h3, h4, h5, h6 {
   margin-top: var(--spacing-2xl);
   margin-bottom: var(--spacing-lg);
   color: var(--color-primary);
-  transition: color var(--theme-transition);
 }
 
 h1 { font-size: var(--font-size-xl); }
@@ -278,7 +276,6 @@ em, i {
   left: 0;
   right: 0;
   z-index: var(--z-header);
-  transition: background-color var(--theme-transition), border-color var(--theme-transition);
 }
 
 .admin-bar {
@@ -443,11 +440,10 @@ em, i {
   display: none;
 }
 
-/* Dark Mode Toggle */
+/* Theme Toggle (auto / light / dark) */
 .theme-toggle {
-  display: flex;
+  display: none; /* shown once the head script has set data-theme-mode */
   align-items: center;
-  gap: var(--spacing-sm);
   padding: var(--spacing-sm) var(--spacing-lg);
   background: var(--color-surface);
   border: 1px solid var(--color-border);
@@ -459,6 +455,10 @@ em, i {
   transition: all var(--hover-transition);
 }
 
+:root[data-theme-mode] .theme-toggle {
+  display: flex;
+}
+
 .theme-toggle:hover {
   background: var(--color-accent);
   color: var(--color-on-accent);
@@ -466,9 +466,23 @@ em, i {
   transform: translateY(-2px);
 }
 
+.theme-toggle-state {
+  display: none;
+  align-items: center;
+  gap: var(--spacing-sm);
+}
+
+:root[data-theme-mode="auto"] .theme-toggle-state[data-mode="auto"],
+:root[data-theme-mode="light"] .theme-toggle-state[data-mode="light"],
+:root[data-theme-mode="dark"] .theme-toggle-state[data-mode="dark"] {
+  display: flex;
+}
+
 .theme-toggle-icon {
-  font-size: 1.25rem;
-  line-height: 1;
+  display: block;
+  width: 1.25rem;
+  height: 1.25rem;
+  flex-shrink: 0;
 }
 
 /* ========================================================================
@@ -638,7 +652,6 @@ a.post-thumbnail:hover img {
   border-top: 1px solid var(--color-border);
   padding: var(--spacing-2xl) 0;
   margin-top: var(--spacing-3xl);
-  transition: background-color var(--theme-transition), border-color var(--theme-transition);
 }
 
 .footer-container {
@@ -789,7 +802,7 @@ select {
   color: var(--color-primary);
   font-family: var(--font-primary);
   font-size: var(--font-size-base);
-  transition: border-color var(--hover-transition), background-color var(--theme-transition);
+  transition: border-color var(--hover-transition);
 }
 
 input::placeholder,

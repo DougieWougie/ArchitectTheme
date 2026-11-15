@@ -326,20 +326,13 @@ html {
 }
 
 /* ========================================================================
-   Theme Transition (smooth theme switching)
+   Theme Switch
+   The toggle cross-fades the whole page with the View Transitions API
+   (see dark-mode-toggle.js), so individual elements carry no colour
+   transition of their own and cannot drift out of step.
    ======================================================================== */
 
-body,
-.site-header,
-.post-card,
-.widget,
-.site-footer,
-button,
-input,
-textarea,
-select,
-a {
-  transition: background-color var(--theme-transition),
-              color var(--theme-transition),
-              border-color var(--theme-transition);
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation-duration: 0.25s;
 }

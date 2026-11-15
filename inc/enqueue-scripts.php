@@ -236,15 +236,33 @@ function baffled_architect_enqueue_assets() {
 add_action('wp_enqueue_scripts', 'baffled_architect_enqueue_assets');
 
 /**
- * Add inline script for dark mode to prevent FOUC (Flash of Unstyled Content)
- * This must run before any styles are loaded
+ * Resolve the colour theme before first paint to prevent a flash.
+ *
+ * Sets two attributes on <html>:
+ *   data-theme-mode  the visitor's choice: auto | light | dark
+ *   data-theme       the theme actually shown: light | dark
+ * "auto" (nothing saved) follows the OS preference. Keep this logic in step
+ * with assets/js/dark-mode-toggle.js.
  */
 function baffled_architect_dark_mode_inline() {
     ?>
+    <meta name="color-scheme" content="light dark">
     <script>
     (function() {
-        const theme = localStorage.getItem('theme') || 'light';
-        document.documentElement.setAttribute('data-theme', theme);
+        var mode = 'auto';
+        try {
+            var saved = localStorage.getItem('theme');
+            if (saved === 'light' || saved === 'dark') {
+                mode = saved;
+            }
+        } catch (e) {}
+        var theme = mode;
+        if (mode === 'auto') {
+            theme = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+        }
+        var root = document.documentElement;
+        root.setAttribute('data-theme-mode', mode);
+        root.setAttribute('data-theme', theme);
     })();
     </script>
     <?php
