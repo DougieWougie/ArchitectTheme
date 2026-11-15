@@ -57,7 +57,7 @@ function baffled_architect_setup() {
 
     // Add support for editor styles
     add_theme_support('editor-styles');
-    add_editor_style('assets/css/editor-style.css');
+    add_editor_style(array('assets/css/fonts.css', 'assets/css/editor-style.css'));
 
     // Add support for wide and full alignment
     add_theme_support('align-wide');

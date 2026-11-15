@@ -15,6 +15,7 @@ if (!defined('ABSPATH')) {
 define('BAFFLED_ARCHITECT_VERSION', '2.2.0');
 define('BAFFLED_ARCHITECT_DIR', get_template_directory());
 define('BAFFLED_ARCHITECT_URI', get_template_directory_uri());
+define('BAFFLED_ARCHITECT_PRISM_VERSION', '1.30.0'); // bundled in assets/vendor/prism
 
 // Set content width for embedded content
 if (!isset($content_width)) {

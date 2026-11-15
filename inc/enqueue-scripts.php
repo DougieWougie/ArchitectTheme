@@ -15,12 +15,12 @@ if (!defined('ABSPATH')) {
  * Enqueue theme styles and scripts
  */
 function baffled_architect_enqueue_assets() {
-    // Google Fonts
+    // Web fonts, self-hosted in assets/fonts (Poppins, Special Elite, Fira Code)
     wp_enqueue_style(
         'baffled-architect-fonts',
-        'https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Special+Elite&display=swap',
+        BAFFLED_ARCHITECT_URI . '/assets/css/fonts.css',
         array(),
-        null
+        BAFFLED_ARCHITECT_VERSION
     );
 
     // Main stylesheet (with theme header)
@@ -169,62 +169,68 @@ function baffled_architect_enqueue_assets() {
         true
     );
 
-    // Prism.js core
+    /*
+     * Prism.js is bundled in assets/vendor/prism rather than loaded from a
+     * CDN. The autoloader works out the components/ path from its own URL,
+     * so keep that folder layout if the files are ever moved or upgraded.
+     */
+
+    // Prism.js core (with markup, CSS, C-like and JavaScript grammars)
     wp_enqueue_script(
         'prism-core',
-        'https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js',
+        BAFFLED_ARCHITECT_URI . '/assets/vendor/prism/prism.min.js',
         array(),
-        '1.29.0',
+        BAFFLED_ARCHITECT_PRISM_VERSION,
         true
     );
 
     // Prism.js Autoloader plugin - lazy-loads language grammars
     wp_enqueue_script(
         'prism-autoloader',
-        'https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/autoloader/prism-autoloader.min.js',
+        BAFFLED_ARCHITECT_URI . '/assets/vendor/prism/plugins/autoloader/prism-autoloader.min.js',
         array('prism-core'),
-        '1.29.0',
+        BAFFLED_ARCHITECT_PRISM_VERSION,
         true
     );
 
     // Prism.js Toolbar plugin (required by Copy to Clipboard)
     wp_enqueue_style(
         'prism-toolbar',
-        'https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/toolbar/prism-toolbar.min.css',
+        BAFFLED_ARCHITECT_URI . '/assets/vendor/prism/plugins/toolbar/prism-toolbar.min.css',
         array('prism-theme'),
-        '1.29.0'
+        BAFFLED_ARCHITECT_PRISM_VERSION
     );
 
     wp_enqueue_script(
         'prism-toolbar',
-        'https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/toolbar/prism-toolbar.min.js',
+        BAFFLED_ARCHITECT_URI . '/assets/vendor/prism/plugins/toolbar/prism-toolbar.min.js',
         array('prism-core'),
-        '1.29.0',
+        BAFFLED_ARCHITECT_PRISM_VERSION,
         true
     );
 
     // Prism.js Line Numbers plugin - add the `line-numbers` class to a code block
     wp_enqueue_style(
         'prism-line-numbers',
-        'https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.css',
+        BAFFLED_ARCHITECT_URI . '/assets/vendor/prism/plugins/line-numbers/prism-line-numbers.min.css',
         array('prism-theme'),
-        '1.29.0'
+        BAFFLED_ARCHITECT_PRISM_VERSION
     );
 
     wp_enqueue_script(
         'prism-line-numbers',
-        'https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.js',
+        BAFFLED_ARCHITECT_URI . '/assets/vendor/prism/plugins/line-numbers/prism-line-numbers.min.js',
         array('prism-core'),
-        '1.29.0',
+        BAFFLED_ARCHITECT_PRISM_VERSION,
         true
     );
 
     // Prism.js Copy to Clipboard plugin
     wp_enqueue_script(
         'prism-copy-to-clipboard',
-        'https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/copy-to-clipboard/prism-copy-to-clipboard.min.js',
+        BAFFLED_ARCHITECT_URI . '/assets/vendor/prism/plugins/copy-to-clipboard/prism-copy-to-clipboard.min.js',
         array('prism-toolbar'),
-        '1.29.0',
+        BAFFLED_ARCHITECT_PRISM_VERSION,
         true
     );
 
@@ -268,27 +274,3 @@ function baffled_architect_dark_mode_inline() {
     <?php
 }
 add_action('wp_head', 'baffled_architect_dark_mode_inline', 1);
-
-/**
- * Add preconnect for Google Fonts
- */
-function baffled_architect_resource_hints($urls, $relation_type) {
-    if (wp_style_is('baffled-architect-fonts', 'queue') && 'preconnect' === $relation_type) {
-        $urls[] = array(
-            'href' => 'https://fonts.googleapis.com',
-            'crossorigin',
-        );
-        $urls[] = array(
-            'href' => 'https://fonts.gstatic.com',
-            'crossorigin',
-        );
-    }
-    if (wp_script_is('prism-core', 'queue') && 'preconnect' === $relation_type) {
-        $urls[] = array(
-            'href' => 'https://cdnjs.cloudflare.com',
-            'crossorigin',
-        );
-    }
-    return $urls;
-}
-add_filter('wp_resource_hints', 'baffled_architect_resource_hints', 10, 2);
