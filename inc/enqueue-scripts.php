@@ -39,7 +39,7 @@ function baffled_architect_enqueue_assets() {
         BAFFLED_ARCHITECT_VERSION
     );
 
-    // Dark mode styles
+    // Dark mode extras (colours themselves live in theme-base.css)
     wp_enqueue_style(
         'baffled-architect-dark',
         BAFFLED_ARCHITECT_URI . '/assets/css/theme-dark.css',
@@ -87,12 +87,13 @@ function baffled_architect_enqueue_assets() {
         BAFFLED_ARCHITECT_VERSION
     );
 
-    // Prism.js syntax highlighting - light theme
+    // Prism.js syntax colours - the theme's own stylesheet, driven by the
+    // --code-* tokens so it follows light and dark mode
     wp_enqueue_style(
         'prism-theme',
-        'https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css',
+        BAFFLED_ARCHITECT_URI . '/assets/css/prism-theme.css',
         array('baffled-architect-base'),
-        '1.29.0'
+        BAFFLED_ARCHITECT_VERSION
     );
 
     // 404 page styles
@@ -227,15 +228,6 @@ function baffled_architect_enqueue_assets() {
         true
     );
 
-    // Prism theme sync - re-highlights on dark/light toggle
-    wp_enqueue_script(
-        'baffled-architect-prism-sync',
-        BAFFLED_ARCHITECT_URI . '/assets/js/prism-theme-sync.js',
-        array('prism-core', 'baffled-architect-dark-mode'),
-        BAFFLED_ARCHITECT_VERSION,
-        true
-    );
-
     // Comments reply script
     if (is_singular() && comments_open() && get_option('thread_comments')) {
         wp_enqueue_script('comment-reply');
@@ -273,7 +265,7 @@ function baffled_architect_resource_hints($urls, $relation_type) {
             'crossorigin',
         );
     }
-    if (wp_style_is('prism-theme', 'queue') && 'preconnect' === $relation_type) {
+    if (wp_script_is('prism-core', 'queue') && 'preconnect' === $relation_type) {
         $urls[] = array(
             'href' => 'https://cdnjs.cloudflare.com',
             'crossorigin',

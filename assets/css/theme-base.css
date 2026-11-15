@@ -11,16 +11,36 @@
    ======================================================================== */
 
 :root {
-  /* Colors - Light Mode (Default) */
-  --color-primary: #1a1a1a;
-  --color-secondary: #666666;
-  --color-accent: #8b5cf6;
-  --color-accent-alt: #06b6d4;
-  --color-background: #ffffff;
-  --color-surface: #f9fafb;
-  --color-border: #e5e7eb;
-  --color-link: #8b5cf6;
-  --color-link-hover: #7c3aed;
+  /*
+   * Colors
+   * Each token is defined once as light-dark(<light>, <dark>). The browser
+   * picks a side from `color-scheme`, which follows the OS setting unless
+   * the theme toggle pins it via [data-theme] (see the rules below :root).
+   */
+  color-scheme: light dark;
+
+  --color-primary: light-dark(#1a1a1a, #f9fafb);
+  --color-secondary: light-dark(#666666, #d1d5db);
+  --color-accent: light-dark(#7c3aed, #a78bfa);
+  --color-accent-alt: light-dark(#06b6d4, #22d3ee);
+  --color-on-accent: light-dark(#ffffff, #0f172a); /* text/icons on an accent fill */
+  --color-background: light-dark(#ffffff, #0f172a);
+  --color-surface: light-dark(#f9fafb, #1e293b);
+  --color-input: light-dark(#ffffff, #1e293b);     /* form field background */
+  --color-border: light-dark(#e5e7eb, #334155);
+  --color-link: light-dark(#7c3aed, #a78bfa);
+  --color-link-hover: light-dark(#6d28d9, #c4b5fd);
+
+  /* Syntax highlighting (Prism tokens, see prism-theme.css) */
+  --code-text: light-dark(#1a1a1a, #e2e8f0);
+  --code-comment: light-dark(#6b7280, #94a3b8);
+  --code-punctuation: light-dark(#6b7280, #94a3b8);
+  --code-constant: light-dark(#990055, #fb923c);
+  --code-string: light-dark(#4d7c0f, #4ade80);
+  --code-operator: light-dark(#8a5a2b, #38bdf8);
+  --code-keyword: light-dark(#0077aa, #c084fc);
+  --code-function: light-dark(#c2255c, #38bdf8);
+  --code-variable: light-dark(#b45309, #fb923c);
 
   /* Typography */
   --font-primary: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
@@ -47,10 +67,10 @@
   --spacing-3xl: 4rem;
 
   /* Shadows */
-  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
-  --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);
-  --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.15);
-  --shadow-xl: 0 20px 25px rgba(0, 0, 0, 0.2);
+  --shadow-sm: 0 1px 2px light-dark(rgb(0 0 0 / 0.05), rgb(0 0 0 / 0.3));
+  --shadow-md: 0 4px 6px light-dark(rgb(0 0 0 / 0.1), rgb(0 0 0 / 0.4));
+  --shadow-lg: 0 10px 15px light-dark(rgb(0 0 0 / 0.15), rgb(0 0 0 / 0.5));
+  --shadow-xl: 0 20px 25px light-dark(rgb(0 0 0 / 0.2), rgb(0 0 0 / 0.6));
 
   /* Layout */
   --container-max-width: 1200px;
@@ -71,6 +91,77 @@
   --z-header: 100;
   --z-scroll-top: 999;
   --z-modal: 1000;
+}
+
+/* The theme toggle pins the scheme; without it the OS setting applies. */
+:root[data-theme="light"] {
+  color-scheme: light;
+}
+
+:root[data-theme="dark"] {
+  color-scheme: dark;
+}
+
+/*
+ * Fallback for browsers without light-dark() (before Chrome 123,
+ * Firefox 120, Safari 17.5). The head script always sets [data-theme], so
+ * the toggle and the OS preference still work there. Delete this block
+ * once those browsers no longer matter.
+ */
+@supports not (color: light-dark(#000, #fff)) {
+  :root {
+    --color-primary: #1a1a1a;
+    --color-secondary: #666666;
+    --color-accent: #7c3aed;
+    --color-accent-alt: #06b6d4;
+    --color-on-accent: #ffffff;
+    --color-background: #ffffff;
+    --color-surface: #f9fafb;
+    --color-input: #ffffff;
+    --color-border: #e5e7eb;
+    --color-link: #7c3aed;
+    --color-link-hover: #6d28d9;
+    --code-text: #1a1a1a;
+    --code-comment: #6b7280;
+    --code-punctuation: #6b7280;
+    --code-constant: #990055;
+    --code-string: #4d7c0f;
+    --code-operator: #8a5a2b;
+    --code-keyword: #0077aa;
+    --code-function: #c2255c;
+    --code-variable: #b45309;
+    --shadow-sm: 0 1px 2px rgb(0 0 0 / 0.05);
+    --shadow-md: 0 4px 6px rgb(0 0 0 / 0.1);
+    --shadow-lg: 0 10px 15px rgb(0 0 0 / 0.15);
+    --shadow-xl: 0 20px 25px rgb(0 0 0 / 0.2);
+  }
+
+  :root[data-theme="dark"] {
+    --color-primary: #f9fafb;
+    --color-secondary: #d1d5db;
+    --color-accent: #a78bfa;
+    --color-accent-alt: #22d3ee;
+    --color-on-accent: #0f172a;
+    --color-background: #0f172a;
+    --color-surface: #1e293b;
+    --color-input: #1e293b;
+    --color-border: #334155;
+    --color-link: #a78bfa;
+    --color-link-hover: #c4b5fd;
+    --code-text: #e2e8f0;
+    --code-comment: #94a3b8;
+    --code-punctuation: #94a3b8;
+    --code-constant: #fb923c;
+    --code-string: #4ade80;
+    --code-operator: #38bdf8;
+    --code-keyword: #c084fc;
+    --code-function: #38bdf8;
+    --code-variable: #fb923c;
+    --shadow-sm: 0 1px 2px rgb(0 0 0 / 0.3);
+    --shadow-md: 0 4px 6px rgb(0 0 0 / 0.4);
+    --shadow-lg: 0 10px 15px rgb(0 0 0 / 0.5);
+    --shadow-xl: 0 20px 25px rgb(0 0 0 / 0.6);
+  }
 }
 
 /* ========================================================================
@@ -293,7 +384,7 @@ em, i {
 
 .social-link:hover {
   background: var(--color-accent);
-  color: white;
+  color: var(--color-on-accent);
   border-color: var(--color-accent);
   transform: translateY(-2px);
 }
@@ -301,11 +392,20 @@ em, i {
 .social-linkedin:hover {
   background: #0077b5;
   border-color: #0077b5;
+  color: #ffffff;
 }
 
 .social-github:hover {
   background: #333;
   border-color: #333;
+  color: #ffffff;
+}
+
+/* Dropped by browsers without light-dark(), leaving the rule above. */
+.social-github:hover {
+  background: light-dark(#333, #ffffff);
+  border-color: light-dark(#333, #ffffff);
+  color: light-dark(#ffffff, #000000);
 }
 
 /* Navigation */
@@ -361,7 +461,7 @@ em, i {
 
 .theme-toggle:hover {
   background: var(--color-accent);
-  color: white;
+  color: var(--color-on-accent);
   border-color: var(--color-accent);
   transform: translateY(-2px);
 }
@@ -623,7 +723,7 @@ pre[class*="language-"] {
 
 pre code[class*="language-"] {
   background: none;
-  color: var(--color-primary);
+  color: var(--code-text);
   padding: 0;
   font-family: var(--font-code);
   font-size: var(--font-size-sm);
@@ -685,11 +785,17 @@ select {
   padding: var(--spacing-sm) var(--spacing-md);
   border: 1px solid var(--color-border);
   border-radius: var(--radius-sm);
-  background: var(--color-background);
+  background: var(--color-input);
   color: var(--color-primary);
   font-family: var(--font-primary);
   font-size: var(--font-size-base);
   transition: border-color var(--hover-transition), background-color var(--theme-transition);
+}
+
+input::placeholder,
+textarea::placeholder {
+  color: var(--color-secondary);
+  opacity: 1;
 }
 
 input:focus,
@@ -704,7 +810,7 @@ input[type="submit"],
 input[type="button"] {
   padding: var(--spacing-sm) var(--spacing-lg);
   background: var(--color-accent);
-  color: white;
+  color: var(--color-on-accent);
   border: none;
   border-radius: var(--radius-sm);
   font-family: var(--font-primary);
@@ -785,7 +891,7 @@ input[type="button"]:hover {
 .pagination a:hover,
 .pagination .current {
   background: var(--color-accent);
-  color: white;
+  color: var(--color-on-accent);
   border-color: var(--color-accent);
 }
 
@@ -823,7 +929,7 @@ input[type="button"]:hover {
 
 .post-navigation a:hover {
   background: var(--color-accent);
-  color: white;
+  color: var(--color-on-accent);
   border-color: var(--color-accent);
   transform: translateX(0);
 }
@@ -866,7 +972,7 @@ input[type="button"]:hover {
   height: 48px;
   border-radius: 50%;
   background: var(--color-accent);
-  color: white;
+  color: var(--color-on-accent);
   border: none;
   padding: 0;
   overflow: visible;

@@ -13,8 +13,8 @@
         { "color": "#f9fafb", "name": "Surface",     "slug": "surface"     },
         { "color": "#666666", "name": "Secondary",   "slug": "secondary"   },
         { "color": "#e5e7eb", "name": "Border",      "slug": "border"      },
-        { "color": "#8b5cf6", "name": "Accent",      "slug": "accent"      },
-        { "color": "#7c3aed", "name": "Accent Dark", "slug": "accent-dark" },
+        { "color": "#7c3aed", "name": "Accent",      "slug": "accent"      },
+        { "color": "#6d28d9", "name": "Accent Dark", "slug": "accent-dark" },
         { "color": "#06b6d4", "name": "Accent Alt",  "slug": "accent-alt"  }
       ]
     },
