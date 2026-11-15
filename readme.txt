@@ -34,7 +34,8 @@ Baffled Architect is a modern WordPress theme designed specifically for technica
 * Vanilla JavaScript (no jQuery dependency)
 * Intersection Observer API for animations
 * LocalStorage for theme persistence
-* Google Fonts: Poppins and Special Elite
+* Self-hosted fonts: Poppins, Special Elite and Fira Code
+* Prism.js 1.30.0 bundled with the theme (no CDN requests)
 * Modular file organization
 * Translation ready
 
@@ -126,7 +127,10 @@ The theme follows WCAG 2.1 Level AA guidelines:
 
 == Credits ==
 
-* Google Fonts: Poppins and Special Elite
+* Poppins by Indian Type Foundry - SIL Open Font License 1.1 (assets/fonts/LICENSE-Poppins.txt)
+* Special Elite by Astigmatic - Apache License 2.0 (assets/fonts/LICENSE-Special-Elite.txt)
+* Fira Code by The Fira Code Project Authors - SIL Open Font License 1.1 (assets/fonts/LICENSE-Fira-Code.txt)
+* Prism.js by Lea Verou and contributors - MIT License (assets/vendor/prism/LICENSE)
 * Animation techniques inspired by modern web design best practices
 * Dark mode implementation following current web standards
 
@@ -143,6 +147,11 @@ The theme follows WCAG 2.1 Level AA guidelines:
 * Wide-aligned blocks no longer overflow the viewport on mid-sized screens
 * Content column narrowed to 800px for a more readable line length
 * Root font size respects the browser's font size setting
+* Fonts and Prism.js are now served from the theme instead of Google Fonts and cdnjs; Prism updated to 1.30.0
+* Fira Code is now actually loaded for code, and the block editor uses the theme fonts
+* Text fields show a focus outline again
+* The site title is the page's only h1 on the blog front page and a paragraph elsewhere
+* Escaped the tagline and profile picture alt text
 
 = 2.1.0 =
 * Added the Prism.js Line Numbers plugin - add the `line-numbers` class to a code block to number its lines

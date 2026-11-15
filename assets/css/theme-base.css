@@ -833,10 +833,10 @@ textarea::placeholder {
   opacity: 1;
 }
 
+/* The focus outline itself comes from the :focus-visible rule in animations.css */
 input:focus,
 textarea:focus,
 select:focus {
-  outline: none;
   border-color: var(--color-accent);
 }
 

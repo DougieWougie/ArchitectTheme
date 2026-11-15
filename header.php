@@ -16,20 +16,25 @@
     <header id="masthead" class="site-header">
         <div class="header-container">
             <a href="<?php echo esc_url(home_url('/')); ?>" rel="home" class="profile-picture-link">
-                <img src="<?php echo esc_url(get_template_directory_uri() . '/assets/images/ProfilePicture.png'); ?>" alt="<?php bloginfo('name'); ?>" class="profile-picture">
+                <img src="<?php echo esc_url(get_template_directory_uri() . '/assets/images/ProfilePicture.png'); ?>" alt="<?php echo esc_attr(get_bloginfo('name')); ?>" class="profile-picture">
             </a>
 
             <div class="site-branding">
-                <h1 class="site-title">
+                <?php
+                // The site title is the page's <h1> only on the blog front
+                // page; everywhere else the post, page or archive title is.
+                $site_title_tag = (is_front_page() && is_home()) ? 'h1' : 'p';
+                ?>
+                <<?php echo $site_title_tag; ?> class="site-title">
                     <a href="<?php echo esc_url(home_url('/')); ?>" rel="home">
                         <?php bloginfo('name'); ?>
                     </a>
-                </h1>
+                </<?php echo $site_title_tag; ?>>
                 <?php
                 $description = get_bloginfo('description', 'display');
                 if ($description || is_customize_preview()) {
                     ?>
-                    <p class="site-description"><?php echo $description; ?></p>
+                    <p class="site-description"><?php echo esc_html($description); ?></p>
                     <?php
                 }
                 ?>
