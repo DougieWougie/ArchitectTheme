@@ -47,24 +47,37 @@
   --font-accent: 'Special Elite', 'Courier New', monospace;
   --font-code: 'Fira Code', 'Consolas', 'Monaco', 'Courier New', monospace;
 
-  /* Font Sizes (Modular Scale 1.25) */
-  --font-size-xs: 0.8125rem;    /* 13px */
-  --font-size-sm: 0.875rem;     /* 14px */
-  --font-size-base: 1rem;       /* 16px */
-  --font-size-lg: 1.25rem;      /* 20px */
-  --font-size-xl: 1.5625rem;    /* 25px */
-  --font-size-2xl: 1.953rem;    /* 31px */
-  --font-size-3xl: 2.441rem;    /* 39px */
-  --font-size-4xl: 3.052rem;    /* 49px */
+  /*
+   * Font Sizes (Modular Scale 1.25)
+   * Fluid: each size grows smoothly from its minimum at a 360px viewport
+   * to its maximum at 1280px, so no breakpoint overrides are needed. The
+   * rem term keeps text responsive to the reader's browser font setting.
+   */
+  --font-size-xs: 0.8125rem;                                     /* 13px */
+  --font-size-sm: 0.875rem;                                      /* 14px */
+  --font-size-base: clamp(1rem, 0.951rem + 0.217vw, 1.125rem);   /* 16 -> 18px */
+  --font-size-md: clamp(1.0625rem, 1.014rem + 0.217vw, 1.1875rem); /* 17 -> 19px */
+  --font-size-lg: clamp(1.125rem, 1.076rem + 0.217vw, 1.25rem);  /* 18 -> 20px */
+  --font-size-xl: clamp(1.3125rem, 1.215rem + 0.435vw, 1.5625rem); /* 21 -> 25px */
+  --font-size-2xl: clamp(1.5rem, 1.323rem + 0.788vw, 1.953rem);  /* 24 -> 31px */
+  --font-size-3xl: clamp(1.75rem, 1.48rem + 1.202vw, 2.441rem);  /* 28 -> 39px */
+  --font-size-4xl: clamp(2rem, 1.588rem + 1.83vw, 3.052rem);     /* 32 -> 49px */
 
-  /* Spacing */
+  /* Spacing (the larger steps are fluid, 360px -> 1280px) */
   --spacing-xs: 0.25rem;
   --spacing-sm: 0.5rem;
   --spacing-md: 1rem;
   --spacing-lg: 1.5rem;
-  --spacing-xl: 2rem;
-  --spacing-2xl: 3rem;
-  --spacing-3xl: 4rem;
+  --spacing-xl: clamp(1.5rem, 1.304rem + 0.87vw, 2rem);
+  --spacing-2xl: clamp(2rem, 1.609rem + 1.739vw, 3rem);
+  --spacing-3xl: clamp(2.5rem, 1.913rem + 2.609vw, 4rem);
+
+  /* Fluid component sizes (360px -> 1024px) */
+  --gutter: clamp(1rem, 0.458rem + 2.41vw, 2rem);            /* page side padding */
+  --card-padding: clamp(1rem, -0.084rem + 4.82vw, 3rem);     /* post cards */
+  --header-pad: clamp(0.5rem, -0.042rem + 2.41vw, 1.5rem);   /* header top/bottom */
+  /* 56 -> 125px, also capped by viewport height for landscape phones */
+  --avatar-size: clamp(3.5rem, min(1.93rem + 9.19vw, 16vh), 7.8125rem);
 
   /* Shadows */
   --shadow-sm: 0 1px 2px light-dark(rgb(0 0 0 / 0.05), rgb(0 0 0 / 0.3));
@@ -73,9 +86,9 @@
   --shadow-xl: 0 20px 25px light-dark(rgb(0 0 0 / 0.2), rgb(0 0 0 / 0.6));
 
   /* Layout */
-  --container-max-width: 1200px;
-  --content-max-width: 900px;
-  --sidebar-width: 300px;
+  --container-max-width: 80rem;
+  --content-max-width: 50rem; /* about 75 characters of body text */
+  --sidebar-width: clamp(15rem, 25vw, 18.75rem);
 
   /* Transitions */
   --theme-transition: 0.3s ease;
@@ -186,6 +199,7 @@ img {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
+  min-height: 100dvh;
 }
 
 .site-content {
@@ -195,7 +209,7 @@ img {
 .content-wrapper {
   max-width: var(--container-max-width);
   margin: 0 auto;
-  padding: var(--spacing-xl) var(--spacing-md);
+  padding: var(--spacing-2xl) var(--gutter);
   display: grid;
   grid-template-columns: 1fr;
   gap: var(--spacing-2xl);
@@ -203,13 +217,14 @@ img {
 
 @media (min-width: 1024px) {
   .content-wrapper {
-    grid-template-columns: 1fr var(--sidebar-width);
+    grid-template-columns: minmax(0, 1fr) var(--sidebar-width);
   }
+}
 
-  .no-sidebar .content-wrapper {
-    grid-template-columns: 1fr;
-    max-width: var(--content-max-width);
-  }
+/* No sidebar: a single centred column at a readable width, at every size */
+.no-sidebar .content-wrapper {
+  grid-template-columns: minmax(0, 1fr);
+  max-width: calc(var(--content-max-width) + 2 * var(--gutter));
 }
 
 /* ========================================================================
@@ -227,7 +242,7 @@ h1, h2, h3, h4, h5, h6 {
 
 h1 { font-size: var(--font-size-xl); }
 h2 { font-size: var(--font-size-lg); }
-h3 { font-size: 1.0625rem; }
+h3 { font-size: var(--font-size-md); }
 h4 { font-size: var(--font-size-base); }
 h5 { font-size: var(--font-size-sm); }
 h6 { font-size: var(--font-size-sm); }
@@ -270,11 +285,9 @@ em, i {
 .site-header {
   background: var(--color-surface);
   border-bottom: 1px solid var(--color-border);
-  padding: var(--spacing-lg) 0;
-  position: fixed;
+  padding: var(--header-pad) 0;
+  position: sticky;
   top: var(--wp-admin-bar-height, 0px);
-  left: 0;
-  right: 0;
   z-index: var(--z-header);
 }
 
@@ -285,7 +298,7 @@ em, i {
 @media screen and (max-width: 782px) {
   /*
    * On screens <=782px WordPress's #wpadminbar is position: absolute (not fixed),
-   * so it scrolls away with the page. Pin the fixed header to the top so it
+   * so it scrolls away with the page. Pin the sticky header to the top so it
    * doesn't leave a gap once the admin bar has scrolled off.
    */
   .admin-bar .site-header {
@@ -293,22 +306,26 @@ em, i {
   }
 }
 
-.site-content {
-  padding-top: var(--header-height, 5rem);
-}
-
+/* Single posts: the header scrolls away with the page. It stays positioned
+   so the mobile menu can still anchor to it. */
 .single .site-header {
-  position: static;
+  position: relative;
+  top: auto;
 }
 
-.single .site-content {
-  padding-top: 0;
+/* Keep in-page anchor targets clear of the sticky header */
+html {
+  scroll-padding-top: calc(var(--avatar-size) + 2 * var(--header-pad) + var(--spacing-md));
+}
+
+html:has(body.single) {
+  scroll-padding-top: var(--spacing-md);
 }
 
 .header-container {
   max-width: var(--container-max-width);
   margin: 0 auto;
-  padding: 0 var(--spacing-md);
+  padding: 0 var(--gutter);
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -323,9 +340,14 @@ em, i {
 }
 
 /* Profile picture styling */
+.profile-picture-link {
+  flex-shrink: 0;
+}
+
 .profile-picture {
-  width: 125px;
-  height: 125px;
+  display: block;
+  width: var(--avatar-size);
+  height: var(--avatar-size);
   border-radius: 50%;
   border: 3px solid var(--color-border);
   transition: transform 0.6s ease;
@@ -337,7 +359,7 @@ em, i {
 
 .site-title {
   margin: 0;
-  font-size: var(--font-size-xl);
+  font-size: clamp(1rem, 0.6rem + 1.8vw, 1.5625rem); /* 16 -> 25px */
   font-weight: 700;
   font-family: var(--font-accent);
   line-height: 1.2;
@@ -517,7 +539,7 @@ em, i {
   background: var(--color-surface);
   border: 1px solid var(--color-border);
   border-radius: var(--radius-md);
-  padding: var(--spacing-xl);
+  padding: var(--card-padding);
   transition: all var(--hover-transition);
 }
 
@@ -657,12 +679,12 @@ a.post-thumbnail:hover img {
 .footer-container {
   max-width: var(--container-max-width);
   margin: 0 auto;
-  padding: 0 var(--spacing-md);
+  padding: 0 var(--gutter);
 }
 
 .footer-widgets {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 250px), 1fr));
   gap: var(--spacing-xl);
   margin-bottom: var(--spacing-2xl);
 }
@@ -970,7 +992,7 @@ input[type="button"]:hover {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  max-width: 200px;
+  max-width: min(200px, 30vw);
 }
 
 /* ========================================================================

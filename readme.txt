@@ -4,7 +4,7 @@ Contributors: Dougie Richardson
 Requires at least: 5.9
 Tested up to: 6.4
 Requires PHP: 7.4
-Version: 2.1.0
+Version: 2.2.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 Tags: blog, technical, dark-mode, responsive, clean, minimal, one-column, two-columns, custom-colors, custom-menu, editor-style, featured-images, threaded-comments, translation-ready
@@ -17,10 +17,10 @@ Baffled Architect is a modern WordPress theme designed specifically for technica
 
 = Key Features =
 
-* **Dark Mode Toggle** - Seamless light/dark mode switching with localStorage persistence
+* **Dark Mode Toggle** - Auto, light and dark modes; follows the device setting until a choice is made, which is then saved
 * **Scroll-to-Top Button** - Floating button that appears when scrolling down
 * **JavaScript Animations** - Subtle scroll-triggered animations using Intersection Observer API
-* **Responsive Design** - Mobile-first design that looks great on all devices
+* **Fluid Responsive Design** - Type, spacing and layout scale smoothly with the viewport
 * **Code-Friendly** - Enhanced styling for code blocks and syntax highlighting
 * **MathJax Compatible** - Full support for mathematical equations
 * **Prism Compatible** - Enhanced support for syntax highlighted code blocks
@@ -50,7 +50,7 @@ Baffled Architect is a modern WordPress theme designed specifically for technica
 
 = How do I enable dark mode? =
 
-Dark mode can be toggled using the moon/sun icon in the header. Your preference is automatically saved and will persist across sessions.
+By default the theme follows your device's light or dark setting. The button in the header cycles between auto, light and dark; a light or dark choice is saved and persists across sessions, and choosing auto returns to following the device.
 
 = Does this theme support the block editor? =
 
@@ -131,6 +131,18 @@ The theme follows WCAG 2.1 Level AA guidelines:
 * Dark mode implementation following current web standards
 
 == Changelog ==
+
+= 2.2.0 =
+* Dark mode now follows the device setting on first visit, with a three-state toggle (auto, light, dark)
+* Colours are defined once with light-dark(); the accent is darker in light mode and text on accent fills meets 4.5:1 contrast in both modes
+* Editor palette colours now follow dark mode on the front end
+* Prism syntax colours come from the theme's own stylesheet instead of the CDN theme
+* Fluid type and spacing replace the fixed breakpoint sizes; headings are no longer larger on phones than on desktop
+* Header is sticky instead of fixed, with a profile picture that scales with the viewport
+* Navigation collapses behind the menu button below 1024px, and the menu button is now visible on small screens
+* Wide-aligned blocks no longer overflow the viewport on mid-sized screens
+* Content column narrowed to 800px for a more readable line length
+* Root font size respects the browser's font size setting
 
 = 2.1.0 =
 * Added the Prism.js Line Numbers plugin - add the `line-numbers` class to a code block to number its lines

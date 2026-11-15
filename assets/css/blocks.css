@@ -8,25 +8,26 @@
 
 /* ========================================================================
    Wide and Full Alignment
-   Content sits in a 900px column centered within a 1200px container.
-   Wide extends toward the container edges; full breaks to viewport width.
+   Wide extends beyond the content column; full breaks to viewport width.
    ======================================================================== */
 
 .entry-content > .alignwide {
   margin-left: auto;
   margin-right: auto;
-  max-width: var(--container-max-width);
-  width: 100%;
+  max-width: none;
+  width: auto;
 }
 
-/* On wide-enough viewports, pull the block beyond the content column. */
-@media (min-width: 960px) {
-  .entry-content > .alignwide {
-    margin-left: -150px;
-    margin-right: -150px;
-    max-width: var(--container-max-width);
-    width: auto;
-  }
+/*
+ * Without a sidebar the content column is centred, so a wide block can
+ * reach out equally on both sides: up to 150px each, but never further
+ * than the free space between the column and the page gutter. On narrow
+ * viewports that space is zero and the block simply fills the column.
+ */
+.no-sidebar .entry-content > .alignwide {
+  --wide-bleed: min(150px, max(0px, (100vw - 100%) / 2 - var(--gutter)));
+  margin-left: calc(-1 * var(--wide-bleed));
+  margin-right: calc(-1 * var(--wide-bleed));
 }
 
 .entry-content > .alignfull {
