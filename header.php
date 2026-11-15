@@ -16,20 +16,25 @@
     <header id="masthead" class="site-header">
         <div class="header-container">
             <a href="<?php echo esc_url(home_url('/')); ?>" rel="home" class="profile-picture-link">
-                <img src="<?php echo esc_url(get_template_directory_uri() . '/assets/images/ProfilePicture.png'); ?>" alt="<?php bloginfo('name'); ?>" class="profile-picture">
+                <img src="<?php echo esc_url(get_template_directory_uri() . '/assets/images/ProfilePicture.png'); ?>" alt="<?php echo esc_attr(get_bloginfo('name')); ?>" class="profile-picture">
             </a>
 
             <div class="site-branding">
-                <h1 class="site-title">
+                <?php
+                // The site title is the page's <h1> only on the blog front
+                // page; everywhere else the post, page or archive title is.
+                $site_title_tag = (is_front_page() && is_home()) ? 'h1' : 'p';
+                ?>
+                <<?php echo $site_title_tag; ?> class="site-title">
                     <a href="<?php echo esc_url(home_url('/')); ?>" rel="home">
                         <?php bloginfo('name'); ?>
                     </a>
-                </h1>
+                </<?php echo $site_title_tag; ?>>
                 <?php
                 $description = get_bloginfo('description', 'display');
                 if ($description || is_customize_preview()) {
                     ?>
-                    <p class="site-description"><?php echo $description; ?></p>
+                    <p class="site-description"><?php echo esc_html($description); ?></p>
                     <?php
                 }
                 ?>
@@ -64,9 +69,40 @@
                 ?>
             </nav>
 
-            <button class="theme-toggle" aria-label="Toggle dark mode" title="Toggle dark/light mode">
-                <span class="theme-toggle-icon" aria-hidden="true">🌙</span>
-                <span class="theme-toggle-label"><?php esc_html_e('Dark Mode', 'baffled-architect'); ?></span>
+            <?php
+            /*
+             * Three-state theme toggle: auto (follow the OS), light, dark.
+             * All three icons and labels are printed; CSS shows the one that
+             * matches <html data-theme-mode>. The button stays hidden until
+             * the head script has set that attribute, so it never appears
+             * as a dead control when JavaScript is unavailable.
+             */
+            ?>
+            <button type="button" class="theme-toggle"
+                data-label-auto="<?php esc_attr_e('Theme: auto, following your device. Switch theme', 'baffled-architect'); ?>"
+                data-label-light="<?php esc_attr_e('Theme: light. Switch theme', 'baffled-architect'); ?>"
+                data-label-dark="<?php esc_attr_e('Theme: dark. Switch theme', 'baffled-architect'); ?>"
+                aria-label="<?php esc_attr_e('Switch theme', 'baffled-architect'); ?>">
+                <span class="theme-toggle-state" data-mode="auto">
+                    <svg class="theme-toggle-icon" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+                        <circle cx="12" cy="12" r="9"/>
+                        <path d="M12 3a9 9 0 0 0 0 18z" fill="currentColor"/>
+                    </svg>
+                    <span class="theme-toggle-label"><?php esc_html_e('Auto', 'baffled-architect'); ?></span>
+                </span>
+                <span class="theme-toggle-state" data-mode="light">
+                    <svg class="theme-toggle-icon" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+                        <circle cx="12" cy="12" r="4"/>
+                        <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/>
+                    </svg>
+                    <span class="theme-toggle-label"><?php esc_html_e('Light', 'baffled-architect'); ?></span>
+                </span>
+                <span class="theme-toggle-state" data-mode="dark">
+                    <svg class="theme-toggle-icon" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+                    </svg>
+                    <span class="theme-toggle-label"><?php esc_html_e('Dark', 'baffled-architect'); ?></span>
+                </span>
             </button>
         </div>
     </header>

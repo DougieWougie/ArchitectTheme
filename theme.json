@@ -13,13 +13,14 @@
         { "color": "#f9fafb", "name": "Surface",     "slug": "surface"     },
         { "color": "#666666", "name": "Secondary",   "slug": "secondary"   },
         { "color": "#e5e7eb", "name": "Border",      "slug": "border"      },
-        { "color": "#8b5cf6", "name": "Accent",      "slug": "accent"      },
-        { "color": "#7c3aed", "name": "Accent Dark", "slug": "accent-dark" },
+        { "color": "#7c3aed", "name": "Accent",      "slug": "accent"      },
+        { "color": "#6d28d9", "name": "Accent Dark", "slug": "accent-dark" },
         { "color": "#06b6d4", "name": "Accent Alt",  "slug": "accent-alt"  }
       ]
     },
     "typography": {
       "customFontSize": true,
+      "fluid": true,
       "lineHeight": true,
       "fontFamilies": [
         {
@@ -39,14 +40,14 @@
         }
       ],
       "fontSizes": [
-        { "name": "Extra Small", "size": "0.8125rem", "slug": "xs"   },
-        { "name": "Small",       "size": "0.875rem",  "slug": "sm"   },
-        { "name": "Base",        "size": "1rem",      "slug": "base" },
-        { "name": "Large",       "size": "1.25rem",   "slug": "lg"   },
-        { "name": "Extra Large", "size": "1.5625rem", "slug": "xl"   },
-        { "name": "2X Large",    "size": "1.953rem",  "slug": "2xl"  },
-        { "name": "3X Large",    "size": "2.441rem",  "slug": "3xl"  },
-        { "name": "4X Large",    "size": "3.052rem",  "slug": "4xl"  }
+        { "name": "Extra Small", "size": "0.8125rem", "slug": "xs", "fluid": false },
+        { "name": "Small",       "size": "0.875rem",  "slug": "sm", "fluid": false },
+        { "name": "Base",        "size": "1rem",      "slug": "base", "fluid": { "min": "1rem", "max": "1.125rem" } },
+        { "name": "Large",       "size": "1.25rem",   "slug": "lg", "fluid": { "min": "1.125rem", "max": "1.25rem" } },
+        { "name": "Extra Large", "size": "1.5625rem", "slug": "xl", "fluid": { "min": "1.3125rem", "max": "1.5625rem" } },
+        { "name": "2X Large",    "size": "1.953rem",  "slug": "2xl", "fluid": { "min": "1.5rem", "max": "1.953rem" } },
+        { "name": "3X Large",    "size": "2.441rem",  "slug": "3xl", "fluid": { "min": "1.75rem", "max": "2.441rem" } },
+        { "name": "4X Large",    "size": "3.052rem",  "slug": "4xl", "fluid": { "min": "2rem", "max": "3.052rem" } }
       ]
     },
     "spacing": {
@@ -64,8 +65,8 @@
       ]
     },
     "layout": {
-      "contentSize": "900px",
-      "wideSize": "1200px"
+      "contentSize": "800px",
+      "wideSize": "1280px"
     },
     "border": {
       "color": true,

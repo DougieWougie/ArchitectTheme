@@ -11,51 +11,84 @@
    ======================================================================== */
 
 :root {
-  /* Colors - Light Mode (Default) */
-  --color-primary: #1a1a1a;
-  --color-secondary: #666666;
-  --color-accent: #8b5cf6;
-  --color-accent-alt: #06b6d4;
-  --color-background: #ffffff;
-  --color-surface: #f9fafb;
-  --color-border: #e5e7eb;
-  --color-link: #8b5cf6;
-  --color-link-hover: #7c3aed;
+  /*
+   * Colors
+   * Each token is defined once as light-dark(<light>, <dark>). The browser
+   * picks a side from `color-scheme`, which follows the OS setting unless
+   * the theme toggle pins it via [data-theme] (see the rules below :root).
+   */
+  color-scheme: light dark;
+
+  --color-primary: light-dark(#1a1a1a, #f9fafb);
+  --color-secondary: light-dark(#666666, #d1d5db);
+  --color-accent: light-dark(#7c3aed, #a78bfa);
+  --color-accent-alt: light-dark(#06b6d4, #22d3ee);
+  --color-on-accent: light-dark(#ffffff, #0f172a); /* text/icons on an accent fill */
+  --color-background: light-dark(#ffffff, #0f172a);
+  --color-surface: light-dark(#f9fafb, #1e293b);
+  --color-input: light-dark(#ffffff, #1e293b);     /* form field background */
+  --color-border: light-dark(#e5e7eb, #334155);
+  --color-link: light-dark(#7c3aed, #a78bfa);
+  --color-link-hover: light-dark(#6d28d9, #c4b5fd);
+
+  /* Syntax highlighting (Prism tokens, see prism-theme.css) */
+  --code-text: light-dark(#1a1a1a, #e2e8f0);
+  --code-comment: light-dark(#6b7280, #94a3b8);
+  --code-punctuation: light-dark(#6b7280, #94a3b8);
+  --code-constant: light-dark(#990055, #fb923c);
+  --code-string: light-dark(#4d7c0f, #4ade80);
+  --code-operator: light-dark(#8a5a2b, #38bdf8);
+  --code-keyword: light-dark(#0077aa, #c084fc);
+  --code-function: light-dark(#c2255c, #38bdf8);
+  --code-variable: light-dark(#b45309, #fb923c);
 
   /* Typography */
   --font-primary: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   --font-accent: 'Special Elite', 'Courier New', monospace;
   --font-code: 'Fira Code', 'Consolas', 'Monaco', 'Courier New', monospace;
 
-  /* Font Sizes (Modular Scale 1.25) */
-  --font-size-xs: 0.8125rem;    /* 13px */
-  --font-size-sm: 0.875rem;     /* 14px */
-  --font-size-base: 1rem;       /* 16px */
-  --font-size-lg: 1.25rem;      /* 20px */
-  --font-size-xl: 1.5625rem;    /* 25px */
-  --font-size-2xl: 1.953rem;    /* 31px */
-  --font-size-3xl: 2.441rem;    /* 39px */
-  --font-size-4xl: 3.052rem;    /* 49px */
+  /*
+   * Font Sizes (Modular Scale 1.25)
+   * Fluid: each size grows smoothly from its minimum at a 360px viewport
+   * to its maximum at 1280px, so no breakpoint overrides are needed. The
+   * rem term keeps text responsive to the reader's browser font setting.
+   */
+  --font-size-xs: 0.8125rem;                                     /* 13px */
+  --font-size-sm: 0.875rem;                                      /* 14px */
+  --font-size-base: clamp(1rem, 0.951rem + 0.217vw, 1.125rem);   /* 16 -> 18px */
+  --font-size-md: clamp(1.0625rem, 1.014rem + 0.217vw, 1.1875rem); /* 17 -> 19px */
+  --font-size-lg: clamp(1.125rem, 1.076rem + 0.217vw, 1.25rem);  /* 18 -> 20px */
+  --font-size-xl: clamp(1.3125rem, 1.215rem + 0.435vw, 1.5625rem); /* 21 -> 25px */
+  --font-size-2xl: clamp(1.5rem, 1.323rem + 0.788vw, 1.953rem);  /* 24 -> 31px */
+  --font-size-3xl: clamp(1.75rem, 1.48rem + 1.202vw, 2.441rem);  /* 28 -> 39px */
+  --font-size-4xl: clamp(2rem, 1.588rem + 1.83vw, 3.052rem);     /* 32 -> 49px */
 
-  /* Spacing */
+  /* Spacing (the larger steps are fluid, 360px -> 1280px) */
   --spacing-xs: 0.25rem;
   --spacing-sm: 0.5rem;
   --spacing-md: 1rem;
   --spacing-lg: 1.5rem;
-  --spacing-xl: 2rem;
-  --spacing-2xl: 3rem;
-  --spacing-3xl: 4rem;
+  --spacing-xl: clamp(1.5rem, 1.304rem + 0.87vw, 2rem);
+  --spacing-2xl: clamp(2rem, 1.609rem + 1.739vw, 3rem);
+  --spacing-3xl: clamp(2.5rem, 1.913rem + 2.609vw, 4rem);
+
+  /* Fluid component sizes (360px -> 1024px) */
+  --gutter: clamp(1rem, 0.458rem + 2.41vw, 2rem);            /* page side padding */
+  --card-padding: clamp(1rem, -0.084rem + 4.82vw, 3rem);     /* post cards */
+  --header-pad: clamp(0.5rem, -0.042rem + 2.41vw, 1.5rem);   /* header top/bottom */
+  /* 56 -> 125px, also capped by viewport height for landscape phones */
+  --avatar-size: clamp(3.5rem, min(1.93rem + 9.19vw, 16vh), 7.8125rem);
 
   /* Shadows */
-  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
-  --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);
-  --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.15);
-  --shadow-xl: 0 20px 25px rgba(0, 0, 0, 0.2);
+  --shadow-sm: 0 1px 2px light-dark(rgb(0 0 0 / 0.05), rgb(0 0 0 / 0.3));
+  --shadow-md: 0 4px 6px light-dark(rgb(0 0 0 / 0.1), rgb(0 0 0 / 0.4));
+  --shadow-lg: 0 10px 15px light-dark(rgb(0 0 0 / 0.15), rgb(0 0 0 / 0.5));
+  --shadow-xl: 0 20px 25px light-dark(rgb(0 0 0 / 0.2), rgb(0 0 0 / 0.6));
 
   /* Layout */
-  --container-max-width: 1200px;
-  --content-max-width: 900px;
-  --sidebar-width: 300px;
+  --container-max-width: 80rem;
+  --content-max-width: 50rem; /* about 75 characters of body text */
+  --sidebar-width: clamp(15rem, 25vw, 18.75rem);
 
   /* Transitions */
   --theme-transition: 0.3s ease;
@@ -73,6 +106,77 @@
   --z-modal: 1000;
 }
 
+/* The theme toggle pins the scheme; without it the OS setting applies. */
+:root[data-theme="light"] {
+  color-scheme: light;
+}
+
+:root[data-theme="dark"] {
+  color-scheme: dark;
+}
+
+/*
+ * Fallback for browsers without light-dark() (before Chrome 123,
+ * Firefox 120, Safari 17.5). The head script always sets [data-theme], so
+ * the toggle and the OS preference still work there. Delete this block
+ * once those browsers no longer matter.
+ */
+@supports not (color: light-dark(#000, #fff)) {
+  :root {
+    --color-primary: #1a1a1a;
+    --color-secondary: #666666;
+    --color-accent: #7c3aed;
+    --color-accent-alt: #06b6d4;
+    --color-on-accent: #ffffff;
+    --color-background: #ffffff;
+    --color-surface: #f9fafb;
+    --color-input: #ffffff;
+    --color-border: #e5e7eb;
+    --color-link: #7c3aed;
+    --color-link-hover: #6d28d9;
+    --code-text: #1a1a1a;
+    --code-comment: #6b7280;
+    --code-punctuation: #6b7280;
+    --code-constant: #990055;
+    --code-string: #4d7c0f;
+    --code-operator: #8a5a2b;
+    --code-keyword: #0077aa;
+    --code-function: #c2255c;
+    --code-variable: #b45309;
+    --shadow-sm: 0 1px 2px rgb(0 0 0 / 0.05);
+    --shadow-md: 0 4px 6px rgb(0 0 0 / 0.1);
+    --shadow-lg: 0 10px 15px rgb(0 0 0 / 0.15);
+    --shadow-xl: 0 20px 25px rgb(0 0 0 / 0.2);
+  }
+
+  :root[data-theme="dark"] {
+    --color-primary: #f9fafb;
+    --color-secondary: #d1d5db;
+    --color-accent: #a78bfa;
+    --color-accent-alt: #22d3ee;
+    --color-on-accent: #0f172a;
+    --color-background: #0f172a;
+    --color-surface: #1e293b;
+    --color-input: #1e293b;
+    --color-border: #334155;
+    --color-link: #a78bfa;
+    --color-link-hover: #c4b5fd;
+    --code-text: #e2e8f0;
+    --code-comment: #94a3b8;
+    --code-punctuation: #94a3b8;
+    --code-constant: #fb923c;
+    --code-string: #4ade80;
+    --code-operator: #38bdf8;
+    --code-keyword: #c084fc;
+    --code-function: #38bdf8;
+    --code-variable: #fb923c;
+    --shadow-sm: 0 1px 2px rgb(0 0 0 / 0.3);
+    --shadow-md: 0 4px 6px rgb(0 0 0 / 0.4);
+    --shadow-lg: 0 10px 15px rgb(0 0 0 / 0.5);
+    --shadow-xl: 0 20px 25px rgb(0 0 0 / 0.6);
+  }
+}
+
 /* ========================================================================
    Base Styles
    ======================================================================== */
@@ -83,7 +187,6 @@ body {
   line-height: 1.6;
   color: var(--color-primary);
   background: var(--color-background);
-  transition: background-color var(--theme-transition), color var(--theme-transition);
 }
 
 img {
@@ -96,6 +199,7 @@ img {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
+  min-height: 100dvh;
 }
 
 .site-content {
@@ -105,7 +209,7 @@ img {
 .content-wrapper {
   max-width: var(--container-max-width);
   margin: 0 auto;
-  padding: var(--spacing-xl) var(--spacing-md);
+  padding: var(--spacing-2xl) var(--gutter);
   display: grid;
   grid-template-columns: 1fr;
   gap: var(--spacing-2xl);
@@ -113,13 +217,14 @@ img {
 
 @media (min-width: 1024px) {
   .content-wrapper {
-    grid-template-columns: 1fr var(--sidebar-width);
+    grid-template-columns: minmax(0, 1fr) var(--sidebar-width);
   }
+}
 
-  .no-sidebar .content-wrapper {
-    grid-template-columns: 1fr;
-    max-width: var(--content-max-width);
-  }
+/* No sidebar: a single centred column at a readable width, at every size */
+.no-sidebar .content-wrapper {
+  grid-template-columns: minmax(0, 1fr);
+  max-width: calc(var(--content-max-width) + 2 * var(--gutter));
 }
 
 /* ========================================================================
@@ -133,12 +238,11 @@ h1, h2, h3, h4, h5, h6 {
   margin-top: var(--spacing-2xl);
   margin-bottom: var(--spacing-lg);
   color: var(--color-primary);
-  transition: color var(--theme-transition);
 }
 
 h1 { font-size: var(--font-size-xl); }
 h2 { font-size: var(--font-size-lg); }
-h3 { font-size: 1.0625rem; }
+h3 { font-size: var(--font-size-md); }
 h4 { font-size: var(--font-size-base); }
 h5 { font-size: var(--font-size-sm); }
 h6 { font-size: var(--font-size-sm); }
@@ -181,13 +285,10 @@ em, i {
 .site-header {
   background: var(--color-surface);
   border-bottom: 1px solid var(--color-border);
-  padding: var(--spacing-lg) 0;
-  position: fixed;
+  padding: var(--header-pad) 0;
+  position: sticky;
   top: var(--wp-admin-bar-height, 0px);
-  left: 0;
-  right: 0;
   z-index: var(--z-header);
-  transition: background-color var(--theme-transition), border-color var(--theme-transition);
 }
 
 .admin-bar {
@@ -197,7 +298,7 @@ em, i {
 @media screen and (max-width: 782px) {
   /*
    * On screens <=782px WordPress's #wpadminbar is position: absolute (not fixed),
-   * so it scrolls away with the page. Pin the fixed header to the top so it
+   * so it scrolls away with the page. Pin the sticky header to the top so it
    * doesn't leave a gap once the admin bar has scrolled off.
    */
   .admin-bar .site-header {
@@ -205,22 +306,26 @@ em, i {
   }
 }
 
-.site-content {
-  padding-top: var(--header-height, 5rem);
-}
-
+/* Single posts: the header scrolls away with the page. It stays positioned
+   so the mobile menu can still anchor to it. */
 .single .site-header {
-  position: static;
+  position: relative;
+  top: auto;
 }
 
-.single .site-content {
-  padding-top: 0;
+/* Keep in-page anchor targets clear of the sticky header */
+html {
+  scroll-padding-top: calc(var(--avatar-size) + 2 * var(--header-pad) + var(--spacing-md));
+}
+
+html:has(body.single) {
+  scroll-padding-top: var(--spacing-md);
 }
 
 .header-container {
   max-width: var(--container-max-width);
   margin: 0 auto;
-  padding: 0 var(--spacing-md);
+  padding: 0 var(--gutter);
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -235,9 +340,14 @@ em, i {
 }
 
 /* Profile picture styling */
+.profile-picture-link {
+  flex-shrink: 0;
+}
+
 .profile-picture {
-  width: 125px;
-  height: 125px;
+  display: block;
+  width: var(--avatar-size);
+  height: var(--avatar-size);
   border-radius: 50%;
   border: 3px solid var(--color-border);
   transition: transform 0.6s ease;
@@ -249,7 +359,7 @@ em, i {
 
 .site-title {
   margin: 0;
-  font-size: var(--font-size-xl);
+  font-size: clamp(1rem, 0.6rem + 1.8vw, 1.5625rem); /* 16 -> 25px */
   font-weight: 700;
   font-family: var(--font-accent);
   line-height: 1.2;
@@ -293,7 +403,7 @@ em, i {
 
 .social-link:hover {
   background: var(--color-accent);
-  color: white;
+  color: var(--color-on-accent);
   border-color: var(--color-accent);
   transform: translateY(-2px);
 }
@@ -301,11 +411,20 @@ em, i {
 .social-linkedin:hover {
   background: #0077b5;
   border-color: #0077b5;
+  color: #ffffff;
 }
 
 .social-github:hover {
   background: #333;
   border-color: #333;
+  color: #ffffff;
+}
+
+/* Dropped by browsers without light-dark(), leaving the rule above. */
+.social-github:hover {
+  background: light-dark(#333, #ffffff);
+  border-color: light-dark(#333, #ffffff);
+  color: light-dark(#ffffff, #000000);
 }
 
 /* Navigation */
@@ -343,11 +462,10 @@ em, i {
   display: none;
 }
 
-/* Dark Mode Toggle */
+/* Theme Toggle (auto / light / dark) */
 .theme-toggle {
-  display: flex;
+  display: none; /* shown once the head script has set data-theme-mode */
   align-items: center;
-  gap: var(--spacing-sm);
   padding: var(--spacing-sm) var(--spacing-lg);
   background: var(--color-surface);
   border: 1px solid var(--color-border);
@@ -359,16 +477,34 @@ em, i {
   transition: all var(--hover-transition);
 }
 
+:root[data-theme-mode] .theme-toggle {
+  display: flex;
+}
+
 .theme-toggle:hover {
   background: var(--color-accent);
-  color: white;
+  color: var(--color-on-accent);
   border-color: var(--color-accent);
   transform: translateY(-2px);
 }
 
+.theme-toggle-state {
+  display: none;
+  align-items: center;
+  gap: var(--spacing-sm);
+}
+
+:root[data-theme-mode="auto"] .theme-toggle-state[data-mode="auto"],
+:root[data-theme-mode="light"] .theme-toggle-state[data-mode="light"],
+:root[data-theme-mode="dark"] .theme-toggle-state[data-mode="dark"] {
+  display: flex;
+}
+
 .theme-toggle-icon {
-  font-size: 1.25rem;
-  line-height: 1;
+  display: block;
+  width: 1.25rem;
+  height: 1.25rem;
+  flex-shrink: 0;
 }
 
 /* ========================================================================
@@ -403,7 +539,7 @@ em, i {
   background: var(--color-surface);
   border: 1px solid var(--color-border);
   border-radius: var(--radius-md);
-  padding: var(--spacing-xl);
+  padding: var(--card-padding);
   transition: all var(--hover-transition);
 }
 
@@ -538,18 +674,17 @@ a.post-thumbnail:hover img {
   border-top: 1px solid var(--color-border);
   padding: var(--spacing-2xl) 0;
   margin-top: var(--spacing-3xl);
-  transition: background-color var(--theme-transition), border-color var(--theme-transition);
 }
 
 .footer-container {
   max-width: var(--container-max-width);
   margin: 0 auto;
-  padding: 0 var(--spacing-md);
+  padding: 0 var(--gutter);
 }
 
 .footer-widgets {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 250px), 1fr));
   gap: var(--spacing-xl);
   margin-bottom: var(--spacing-2xl);
 }
@@ -623,7 +758,7 @@ pre[class*="language-"] {
 
 pre code[class*="language-"] {
   background: none;
-  color: var(--color-primary);
+  color: var(--code-text);
   padding: 0;
   font-family: var(--font-code);
   font-size: var(--font-size-sm);
@@ -685,17 +820,23 @@ select {
   padding: var(--spacing-sm) var(--spacing-md);
   border: 1px solid var(--color-border);
   border-radius: var(--radius-sm);
-  background: var(--color-background);
+  background: var(--color-input);
   color: var(--color-primary);
   font-family: var(--font-primary);
   font-size: var(--font-size-base);
-  transition: border-color var(--hover-transition), background-color var(--theme-transition);
+  transition: border-color var(--hover-transition);
 }
 
+input::placeholder,
+textarea::placeholder {
+  color: var(--color-secondary);
+  opacity: 1;
+}
+
+/* The focus outline itself comes from the :focus-visible rule in animations.css */
 input:focus,
 textarea:focus,
 select:focus {
-  outline: none;
   border-color: var(--color-accent);
 }
 
@@ -704,7 +845,7 @@ input[type="submit"],
 input[type="button"] {
   padding: var(--spacing-sm) var(--spacing-lg);
   background: var(--color-accent);
-  color: white;
+  color: var(--color-on-accent);
   border: none;
   border-radius: var(--radius-sm);
   font-family: var(--font-primary);
@@ -785,7 +926,7 @@ input[type="button"]:hover {
 .pagination a:hover,
 .pagination .current {
   background: var(--color-accent);
-  color: white;
+  color: var(--color-on-accent);
   border-color: var(--color-accent);
 }
 
@@ -823,7 +964,7 @@ input[type="button"]:hover {
 
 .post-navigation a:hover {
   background: var(--color-accent);
-  color: white;
+  color: var(--color-on-accent);
   border-color: var(--color-accent);
   transform: translateX(0);
 }
@@ -851,7 +992,7 @@ input[type="button"]:hover {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  max-width: 200px;
+  max-width: min(200px, 30vw);
 }
 
 /* ========================================================================
@@ -866,7 +1007,7 @@ input[type="button"]:hover {
   height: 48px;
   border-radius: 50%;
   background: var(--color-accent);
-  color: white;
+  color: var(--color-on-accent);
   border: none;
   padding: 0;
   overflow: visible;

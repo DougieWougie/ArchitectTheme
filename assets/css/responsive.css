@@ -1,148 +1,45 @@
 /**
  * Responsive Styles
- * Mobile-first responsive design
+ *
+ * Type, spacing and component sizes are fluid: they scale with the viewport
+ * through the clamp() tokens in theme-base.css, so they need no breakpoints.
+ * This file holds only the places where the layout itself changes.
+ *
+ *   < 1024px  navigation collapses behind the menu button
+ *   < 768px   small-screen adjustments
+ *   >= 1024px sidebar sits beside the content (see theme-base.css)
  *
  * @package Baffled_Architect
  * @since 1.0.0
  */
 
 /* ========================================================================
-   Mobile First Base (320px+)
-   All base styles are mobile-first in theme-base.css
+   Collapsed Navigation (below 1024px)
+   Matches the 1024px check in assets/js/navigation.js.
    ======================================================================== */
 
-/* ========================================================================
-   Tablet (768px+)
-   ======================================================================== */
-
-@media (min-width: 768px) {
-  /* Typography */
-  :root {
-    --font-size-base: 1.125rem; /* 18px for better readability */
+@media (max-width: 1023.98px) {
+  /* The nav itself shrinks to just the menu button ... */
+  .main-navigation {
+    flex: 0 0 auto;
   }
 
-  /* Header */
-  .header-container {
-    padding: 0 var(--spacing-xl);
-  }
-
-  /* Content */
-  .content-wrapper {
-    padding: var(--spacing-2xl) var(--spacing-xl);
-  }
-
-  /* Posts Grid */
-  .posts-container {
-    gap: var(--spacing-2xl);
-  }
-
-  /* Post Card */
-  .post-card {
-    padding: var(--spacing-2xl);
-  }
-
-  /* Footer */
-  .footer-container {
-    padding: 0 var(--spacing-xl);
-  }
-
-  /* Scroll to Top Button */
-  .scroll-to-top {
-    bottom: 30px;
-    right: 30px;
-  }
-}
-
-/* ========================================================================
-   Desktop (1024px+)
-   ======================================================================== */
-
-@media (min-width: 1024px) {
-  /* Navigation - Show desktop menu, hide mobile toggle */
-  .menu-toggle {
-    display: none;
-  }
-
-  .nav-menu {
-    display: flex;
-  }
-
-  /* Content Layout - Two column */
-  .content-wrapper {
-    grid-template-columns: 1fr var(--sidebar-width);
-  }
-
-  .no-sidebar .content-wrapper {
-    grid-template-columns: 1fr;
-  }
-}
-
-/* ========================================================================
-   Large Desktop (1280px+)
-   ======================================================================== */
-
-@media (min-width: 1280px) {
-  /* Increase container max-width */
-  :root {
-    --container-max-width: 1280px;
-  }
-
-  /* More spacing */
-  .content-wrapper {
-    padding: var(--spacing-3xl) var(--spacing-2xl);
-  }
-}
-
-/* ========================================================================
-   Mobile (max-width: 767px)
-   ======================================================================== */
-
-@media (max-width: 767px) {
-  /* Typography - Smaller sizes for mobile */
-  h1 { font-size: var(--font-size-3xl); }
-  h2 { font-size: var(--font-size-2xl); }
-  h3 { font-size: var(--font-size-xl); }
-  h4 { font-size: var(--font-size-lg); }
-
-  /* Header */
-  .site-header {
-    padding: var(--spacing-md) 0;
-  }
-
-  .profile-picture {
-    width: 120px;
-    height: 120px;
-  }
-
-  .site-title {
-    font-size: var(--font-size-lg);
-  }
-
-  .site-description {
-    display: none; /* Hide tagline on very small screens */
-  }
-
-  /* Social Links - Smaller on mobile */
-  .social-link {
-    width: 28px;
-    height: 28px;
-  }
-
-  .social-link svg {
-    width: 16px;
-    height: 16px;
-  }
-
-  /* Navigation - Mobile Menu */
   .menu-toggle {
     display: flex;
     align-items: center;
     justify-content: center;
+    min-width: 44px;
+    min-height: 44px;
     background: transparent;
     border: none;
     padding: var(--spacing-sm);
     cursor: pointer;
     color: var(--color-primary);
+  }
+
+  .menu-toggle:hover {
+    background: transparent;
+    transform: none;
   }
 
   .menu-icon {
@@ -157,6 +54,7 @@
   .menu-icon::after {
     content: '';
     position: absolute;
+    left: 0;
     width: 100%;
     height: 2px;
     background: currentColor;
@@ -176,32 +74,35 @@
   }
 
   .menu-toggle[aria-expanded="true"] .menu-icon::before {
-    transform: rotate(45deg) translate(6px, 6px);
+    transform: translateY(8px) rotate(45deg);
   }
 
   .menu-toggle[aria-expanded="true"] .menu-icon::after {
-    transform: rotate(-45deg) translate(6px, -6px);
+    transform: translateY(-8px) rotate(-45deg);
   }
 
-  .main-navigation {
+  /* ... and the menu list drops down below the header when opened. */
+  .nav-menu {
     position: absolute;
     top: 100%;
     left: 0;
-    width: 100%;
+    right: 0;
+    flex-direction: column;
+    gap: 0;
     background: var(--color-surface);
-    border-bottom: 1px solid var(--color-border);
     max-height: 0;
     overflow: hidden;
+    visibility: hidden; /* keeps closed links out of the tab order */
+    transition: max-height 0.3s ease, visibility 0s 0.3s;
+  }
+
+  .main-navigation.toggled .nav-menu {
+    max-height: min(500px, 70vh);
+    overflow-y: auto;
+    visibility: visible;
+    border-bottom: 1px solid var(--color-border);
+    box-shadow: var(--shadow-md);
     transition: max-height 0.3s ease;
-  }
-
-  .main-navigation.toggled {
-    max-height: 500px;
-  }
-
-  .nav-menu {
-    flex-direction: column;
-    padding: var(--spacing-md) 0;
   }
 
   .nav-menu li {
@@ -209,11 +110,11 @@
   }
 
   .nav-menu a {
-    padding: var(--spacing-md) var(--spacing-lg);
-    border-bottom: 1px solid var(--color-border);
+    padding: var(--spacing-md) var(--gutter);
+    border-top: 1px solid var(--color-border);
   }
 
-  /* Dark Mode Toggle - Hide label on mobile */
+  /* Theme toggle: icon only */
   .theme-toggle-label {
     display: none;
   }
@@ -224,18 +125,18 @@
     min-height: 44px;
     justify-content: center;
   }
+}
 
-  /* Post Card */
-  .post-card {
-    padding: var(--spacing-lg);
+/* ========================================================================
+   Small Screens (below 768px)
+   ======================================================================== */
+
+@media (max-width: 767.98px) {
+  .site-description {
+    display: none;
   }
 
-  /* Sidebar */
-  .widget-area {
-    margin-top: var(--spacing-2xl);
-  }
-
-  /* Post Navigation - Allow wrapping on mobile */
+  /* Post Navigation - Allow wrapping */
   .nav-links {
     flex-wrap: wrap;
     gap: var(--spacing-sm);
@@ -245,16 +146,7 @@
     font-size: var(--font-size-xs);
   }
 
-  .nav-title {
-    max-width: 120px;
-  }
-
-  /* Footer Widgets - Single column */
-  .footer-widgets {
-    grid-template-columns: 1fr;
-  }
-
-  /* Scroll to Top Button - Smaller on mobile */
+  /* Scroll to Top Button - Smaller */
   .scroll-to-top {
     bottom: 20px;
     right: 20px;
@@ -295,59 +187,6 @@
   /* Comments - Reduce spacing */
   .comment-list > .comment {
     padding: var(--spacing-md);
-  }
-}
-
-/* ========================================================================
-   Very Small Screens (max-width: 375px)
-   ======================================================================== */
-
-@media (max-width: 375px) {
-  /* Even smaller typography */
-  h1 { font-size: var(--font-size-2xl); }
-  h2 { font-size: var(--font-size-xl); }
-
-  /* Reduce spacing */
-  .content-wrapper {
-    padding: var(--spacing-lg) var(--spacing-sm);
-  }
-
-  .post-card {
-    padding: var(--spacing-md);
-  }
-
-  /* Header - Compact */
-  .site-header {
-    padding: var(--spacing-sm) 0;
-  }
-
-  .header-container {
-    padding: 0 var(--spacing-sm);
-    gap: var(--spacing-sm);
-  }
-
-  .profile-picture {
-    width: 80px;
-    height: 80px;
-  }
-
-  .site-title {
-    font-size: var(--font-size-base);
-  }
-
-  /* Social Links - Even smaller */
-  .social-links {
-    gap: var(--spacing-sm);
-  }
-
-  .social-link {
-    width: 24px;
-    height: 24px;
-  }
-
-  .social-link svg {
-    width: 14px;
-    height: 14px;
   }
 }
 
@@ -438,28 +277,6 @@
 }
 
 /* ========================================================================
-   Landscape Orientation (Mobile)
-   ======================================================================== */
-
-@media (max-width: 767px) and (orientation: landscape) {
-  /* Reduce header height in landscape */
-  .site-header {
-    padding: var(--spacing-sm) 0;
-  }
-
-  .profile-picture {
-    width: 60px;
-    height: 60px;
-  }
-
-  /* Adjust navigation */
-  .main-navigation.toggled {
-    max-height: 300px;
-    overflow-y: auto;
-  }
-}
-
-/* ========================================================================
    High Resolution Displays
    ======================================================================== */
 
@@ -472,13 +289,4 @@
   .site-footer {
     border-width: 0.5px;
   }
-}
-
-/* ========================================================================
-   Dark Mode System Preference
-   ======================================================================== */
-
-@media (prefers-color-scheme: dark) {
-  /* This is handled by JavaScript, but we can provide a fallback */
-  /* The JavaScript will override this with localStorage preference */
 }

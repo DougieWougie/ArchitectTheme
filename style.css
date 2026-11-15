@@ -4,7 +4,7 @@ Theme URI: https://dougiewougie.com
 Author: Dougie Richardson
 Author URI: https://dougiewougie.com
 Description: A modern, clean WordPress theme for technical blogging with dark mode support, JavaScript animations, and smooth scroll features. Optimized for code snippets and mathematical equations.
-Version: 2.1.0
+Version: 2.2.0
 Requires at least: 5.9
 Tested up to: 6.4
 Requires PHP: 7.4
@@ -27,7 +27,7 @@ Tags: blog, technical, dark-mode, responsive, clean, minimal, one-column, two-co
 }
 
 html {
-  font-size: 16px;
+  font-size: 100%; /* respect the reader's browser font size */
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
